@@ -1,0 +1,11 @@
+map_nb_sectors
+map_nb_walls
+# for each sector
+x y z #point3 reference
+z1 z2 #z1 and z2 (sector inclinaison)
+0 1 2 3 4 #list of walls in sector
+# for each wall
+x1 y1 x2 y2 #seg points
+height
+is_portal
+sector1 sector2
