@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   render_sector.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/24 02:27:39 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/24 21:28:03 by ihermell         ###   ########.fr       */
+/*   Created: 2015/05/24 18:57:07 by ihermell          #+#    #+#             */
+/*   Updated: 2015/05/24 22:08:01 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <wolf.h>
 
-int				main(int ac, char **av)
+void			render_sector(t_segment2 *ray, t_game *game, t_mlx *mlx,
+				t_render *render)
 {
-	t_env		*env;
+	int			walls_intersected;
 
-	env = init_env();
-	env->game->map = load_map("maps/map.w");
-	mlx_loop(env->mlx->mlx);
-	(void)ac;
-	(void)av;
-	return (0);
+	walls_intersected = cast_to_sector(ray, game->map->sectors +
+		game->player->current_sector, game, render);
+	printf("%d\n", walls_intersected);
+	(void)mlx;
 }

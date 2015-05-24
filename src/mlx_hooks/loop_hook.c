@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   loop_hook.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/24 02:27:39 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/24 21:28:03 by ihermell         ###   ########.fr       */
+/*   Created: 2015/05/24 21:28:35 by ihermell          #+#    #+#             */
+/*   Updated: 2015/05/24 22:01:48 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <wolf.h>
 
-int				main(int ac, char **av)
+int			loop_hook(t_env *env)
 {
-	t_env		*env;
-
-	env = init_env();
-	env->game->map = load_map("maps/map.w");
-	mlx_loop(env->mlx->mlx);
-	(void)ac;
-	(void)av;
+	render(env);
+(void)env;
 	return (0);
 }
