@@ -6,7 +6,7 @@
 #    By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/03 22:55:20 by ihermell          #+#    #+#              #
-#    Updated: 2015/05/24 05:44:36 by ihermell         ###   ########.fr        #
+#    Updated: 2015/05/25 22:47:46 by ihermell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,12 @@ SRC_NAME	=	main.c \
 				init_env.c \
 				load_map.c \
 				\
-				mlx_hooks/key_hook.c
+				render/render.c \
+				render/cast_to_sector.c \
+				render/render_sector.c \
+				\
+				mlx_hooks/key_hook.c \
+				mlx_hooks/loop_hook.c
 
 SRC			+= $(addprefix $(SRC_DIR),$(SRC_NAME))
 

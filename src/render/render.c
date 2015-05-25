@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/24 02:27:39 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/25 22:46:32 by ihermell         ###   ########.fr       */
+/*   Created: 2015/05/25 22:41:52 by ihermell          #+#    #+#             */
+/*   Updated: 2015/05/25 22:53:43 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <wolf.h>
 
-int				main(int ac, char **av)
+void			render(t_env *e)
 {
-	t_env		*env;
+	t_segment2	ray;
 
-	env = init_env();
-	env->game->map = load_map("maps/map.w");
-	mlx_loop(env->mlx->mlx);
-	(void)ac;
-	(void)av;
-	return (0);
+	ray = fill_segment2(50, 150, 800, 150);
+	render_sector(&ray, e->game->map->sectors, e);
 }

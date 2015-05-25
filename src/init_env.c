@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 02:31:34 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/24 05:44:13 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/25 23:00:15 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ static t_game	*init_game(void)
 	game->input = (t_input*)malloc(sizeof(t_input));
 	game->map = NULL;
 	game->player = (t_player*)malloc(sizeof(t_player));
-	game->player->x = 100;
-	game->player->y = 400;
+	fill_point2(100, 400, &game->player->pos);
 	game->player->angle = 135;
 	game->player->fov = PLAYER_FOV;
 	game->player->height = PLAYER_HEIGHT;
@@ -61,6 +60,8 @@ t_env			*init_env(void)
 	env->game = init_game();
 	env->mlx = init_mlx();
 	env->pplane = init_pplane();
-	mlx_key_hook(env->mlx->win, key_hook, &env);
+	env->render = (t_render*)malloc(sizeof(t_render));
+	mlx_key_hook(env->mlx->win, key_hook, env);
+	mlx_loop_hook(env->mlx->mlx, loop_hook, env);
 	return (env);
 }

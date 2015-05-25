@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 01:25:04 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/24 05:42:25 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/25 22:50:49 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@
 
 typedef struct			s_player
 {
-	double				x;
-	double				y;
+	t_point2			pos;
 	double				angle;
 	int					height;
 	int					fov;
@@ -85,17 +84,36 @@ typedef struct			s_pplane
 	double				angle_btw_rays;
 }						t_pplane;
 
+typedef struct			s_w_intersection
+{
+	int					wall;
+	double				distance;
+}						t_w_intersection;
+
+typedef struct			s_render
+{
+	t_w_intersection	w_intersection[1024];
+}						t_render;
+
 typedef struct			s_env
 {
 	t_mlx				*mlx;
 	t_pplane			*pplane;
 	t_game				*game;
+	t_render			*render;
 }						t_env;
 
 t_env					*init_env(void);
 
 t_map					*load_map(char *map);
 
+void					render(t_env *e);
+void					render_sector(t_segment2 *ray, t_sector *sector,
+						t_env *env);
+int						cast_to_sector(t_segment2 *ray, t_sector *sector,
+						t_env *e);
+
 int						key_hook(int keycode, t_env *e);
+int						loop_hook(t_env *e);
 
 #endif

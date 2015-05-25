@@ -5,23 +5,60 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/24 03:00:15 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/24 05:44:21 by ihermell         ###   ########.fr       */
+/*   Created: 2015/05/25 23:15:10 by ihermell          #+#    #+#             */
+/*   Updated: 2015/05/25 23:29:48 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MLXW_H
 # define MLXW_H
 
+# include <point2.h>
 # include <stdlib.h>
-# include <mlx.h>
 
-# define KEY_ESCAPE		53
+# define KEY_ESCAPE			53
 
-typedef struct		s_mlx
+# define DL_X0				m->i[0]
+# define DL_Y0				m->i[1]
+# define DL_X1				m->i[2]
+# define DL_Y1				m->i[3]
+# define DL_DX				m->i[4]
+# define DL_DY				m->i[5]
+# define DL_E				m->i[6]
+# define DL_X				m->i[7]
+# define DL_Y				m->i[8]
+# define LINE_COLOR			m->i[9]
+
+# define D_HACK1			if (DL_DX>0){if((DL_DY=DL_Y1-DL_Y0)!=0){
+# define D_HACK2			if(DL_DY>0){octant_1_2(m);}else{octant_7_8(m);}
+# define D_HACK3			}else{horizontal_line(m);}}
+
+typedef struct				s_mlx
 {
-	void			*mlx;
-	void			*win;
-}					t_mlx;
+	void					*mlx;
+	void					*win;
+	void					*img;
+	char					*img_data;
+	int						img_bpp;
+	int						img_size_line;
+	int						img_endian;
+	int						i[10];
+}							t_mlx;
+
+void						init_ints(t_point2 *p0, t_point2 *p1, int color,
+							t_mlx *m);
+void						draw_line(t_point2 *p0, t_point2 *p1,
+							int color, t_mlx *m);
+
+void						vertical_line(t_mlx *m);
+void						horizontal_line(t_mlx *m);
+void						octant_1_2(t_mlx *m);
+void						octant_2(t_mlx *m);
+void						octant_3_4(t_mlx *m);
+void						octant_3(t_mlx *m);
+void						octant_5_6(t_mlx *m);
+void						octant_6(t_mlx *m);
+void						octant_7_8(t_mlx *m);
+void						octant_7(t_mlx *m);
 
 #endif
