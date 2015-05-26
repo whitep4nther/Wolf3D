@@ -6,17 +6,22 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/25 23:15:10 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/25 23:29:48 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/26 22:25:51 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MLXW_H
 # define MLXW_H
 
-# include <point2.h>
+# include <X.h>
+# include <mlx.h>
 # include <stdlib.h>
 
 # define KEY_ESCAPE			53
+# define KEY_LEFT			123
+# define KEY_RIGHT			124
+# define KEY_DOWN			125
+# define KEY_UP				126
 
 # define DL_X0				m->i[0]
 # define DL_Y0				m->i[1]
@@ -45,10 +50,9 @@ typedef struct				s_mlx
 	int						i[10];
 }							t_mlx;
 
-void						init_ints(t_point2 *p0, t_point2 *p1, int color,
-							t_mlx *m);
-void						draw_line(t_point2 *p0, t_point2 *p1,
-							int color, t_mlx *m);
+void						setup_x1_y1_x2(int x1, int y1, int x2, t_mlx *m);
+void						setup_y2_color(int y2, int color, t_mlx *m);
+void						draw_line(t_mlx *m);
 
 void						vertical_line(t_mlx *m);
 void						horizontal_line(t_mlx *m);

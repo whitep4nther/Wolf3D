@@ -6,13 +6,13 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/06 03:29:42 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/25 23:35:21 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/26 19:47:27 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlxw.h>
 
-void			setup_line(int x1, int y1, int x2, t_mlx *m)
+void			setup_x1_y1_x2(int x1, int y1, int x2, t_mlx *m)
 {
 	DL_X = x1;
 	DL_X0 = x1;
@@ -45,10 +45,10 @@ void			draw_line(t_mlx *m)
 				else
 					octant_5_6(m);
 			else
-				horizontal_line(p1, p0, i, e);
+				horizontal_line(m);
 	else
 		if ((DL_DY = DL_Y1 - DL_Y0) > 0)
-			vertical_line(p0, p1, i, e);
+			vertical_line(m);
 		else
-			vertical_line(p1, p0, i, e);
+			vertical_line(m);
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quadrans.c                                         :+:      :+:    :+:   */
+/*   octants_1_4.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/06 03:35:08 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/25 23:36:38 by ihermell         ###   ########.fr       */
+/*   Created: 2015/05/26 19:37:39 by ihermell          #+#    #+#             */
+/*   Updated: 2015/05/26 19:44:59 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlxdraw.h"
+#include <mlxw.h>
 
-void			horizontal_line(t_mlx *e)
+void			horizontal_line(t_mlx *m)
 {
 	int			tmp;
 
@@ -24,12 +24,12 @@ void			horizontal_line(t_mlx *e)
 	}
 	while (DL_X < DL_X1)
 	{
-		mlx_pixel_put(DL_X, DL_Y, LINE_COLOR, e);
+		mlx_pixel_put(m->mlx, m->win, DL_X, DL_Y, LINE_COLOR);
 		DL_X++;
 	}
 }
 
-void			octant_1_2(int *i, t_mlx *e)
+void			octant_1_2(t_mlx *m)
 {
 	if (DL_DX >= DL_DY)
 	{
@@ -38,7 +38,7 @@ void			octant_1_2(int *i, t_mlx *e)
 		DL_DY = DL_DY * 2;
 		while (1)
 		{
-			mlx_put_pxl_to_img(DL_X, DL_Y, LINE_COLOR, e);
+			mlx_pixel_put(m->mlx, m->win, DL_X, DL_Y, LINE_COLOR);
 			if (++DL_X == DL_X1)
 				break ;
 			if ((DL_E = DL_E - DL_DY) < 0)
@@ -49,17 +49,17 @@ void			octant_1_2(int *i, t_mlx *e)
 		}
 	}
 	else
-		octant_2(i, e);
+		octant_2(m);
 }
 
-void			octant_2(int *i, t_mlx *e)
+void			octant_2(t_mlx *m)
 {
 	DL_E = DL_DY;
 	DL_DY = DL_E * 2;
 	DL_DX = DL_DX * 2;
 	while (1)
 	{
-		mlx_put_pxl_to_img(DL_X, DL_Y, LINE_COLOR, e);
+		mlx_pixel_put(m->mlx, m->win, DL_X, DL_Y, LINE_COLOR);
 		if (++DL_Y == DL_Y1)
 			break ;
 		if ((DL_E = DL_E - DL_DX) < 0)
@@ -70,7 +70,7 @@ void			octant_2(int *i, t_mlx *e)
 	}
 }
 
-void			octant_3_4(int *i, t_mlx *e)
+void			octant_3_4(t_mlx *m)
 {
 	if (-DL_DX >= DL_DY)
 	{
@@ -79,7 +79,7 @@ void			octant_3_4(int *i, t_mlx *e)
 		DL_DY = DL_DY * 2;
 		while (1)
 		{
-			mlx_put_pxl_to_img(DL_X, DL_Y, LINE_COLOR, e);
+			mlx_pixel_put(m->mlx, m->win, DL_X, DL_Y, LINE_COLOR);
 			if (--DL_X == DL_X1)
 				break ;
 			if ((DL_E = DL_E + DL_DY) >= 0)
@@ -90,17 +90,17 @@ void			octant_3_4(int *i, t_mlx *e)
 		}
 	}
 	else
-		octant_3(i, e);
+		octant_3(m);
 }
 
-void			octant_3(int *i, t_mlx *e)
+void			octant_3(t_mlx *m)
 {
 	DL_E = DL_DY;
 	DL_DY = DL_E * 2;
 	DL_DX = DL_DX * 2;
 	while (1)
 	{
-		mlx_put_pxl_to_img(DL_X, DL_Y, LINE_COLOR, e);
+		mlx_pixel_put(m->mlx, m->win, DL_X, DL_Y, LINE_COLOR);
 		if (++DL_Y == DL_Y1)
 			break ;
 		if ((DL_E = DL_E + DL_DX) <= 0)

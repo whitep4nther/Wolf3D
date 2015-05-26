@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/25 22:40:52 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/25 23:57:09 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/26 22:24:24 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int				loop_hook(t_env *e)
 {
+	process(e);
 	render(e);
 	return (0);
 }

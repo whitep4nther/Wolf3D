@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   move_backward.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/24 02:27:39 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/26 19:52:31 by ihermell         ###   ########.fr       */
+/*   Created: 2015/05/26 21:51:17 by ihermell          #+#    #+#             */
+/*   Updated: 2015/05/26 21:56:40 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <wolf.h>
 
-int				main(int ac, char **av)
+void			move_backward(t_env *e)
 {
-	t_env		*env;
+	t_player	*player;
 
-	env = init_env();
-	env->game->map = load_map("maps/map.w");
-	mlx_loop(env->mlx->mlx);
-	(void)ac;
-	(void)av;
-	return (0);
+	player = e->game->player;
+	player->pos.x = player->pos.x - cos(D2R(player->angle)) * player->speed;
+	player->pos.y = player->pos.y - sin(D2R(player->angle)) * player->speed;
+	update_player_sight(player);
 }

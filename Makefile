@@ -6,7 +6,7 @@
 #    By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/03 22:55:20 by ihermell          #+#    #+#              #
-#    Updated: 2015/05/25 23:58:23 by ihermell         ###   ########.fr        #
+#    Updated: 2015/05/26 22:26:20 by ihermell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,12 +23,23 @@ SRC_DIR		= src/
 SRC_NAME	=	main.c \
 				init_env.c \
 				load_map.c \
+				process.c \
+				\
+				player/set_player_angle.c \
+				player/update_player_sight.c \
+				player/turn_left.c \
+				player/turn_right.c \
+				player/move_forward.c \
+				player/move_backward.c \
 				\
 				render/render.c \
 				render/cast_to_sector.c \
 				render/render_sector.c \
 				\
-				mlx_hooks/key_hook.c \
+				mlx_hooks/keypress_hook.c \
+				mlx_hooks/keyrelease_hook.c \
+				mlx_hooks/mouse_hook.c \
+				mlx_hooks/expose_hook.c \
 				mlx_hooks/loop_hook.c
 
 SRC			+= $(addprefix $(SRC_DIR),$(SRC_NAME))
@@ -44,10 +55,11 @@ LIBFT		= $(addprefix $(LIBFT_DIR), $(LIBFT_NAME))
 INC_DIR		= -I $(addprefix $(LIBFT_DIR), include/) \
 			  -I 3DSPACE/include \
 			  -I MLX/ \
+			  -I MLXW/ \
 			  -I include/ \
 			  -I GNL/
 
-LIBRARIES	= -L $(LIBFT_DIR) -lft -L MLX/ -lmlx 3DSPACE/space3d.a
+LIBRARIES	= -L $(LIBFT_DIR) -lft -L MLX/ -lmlx 3DSPACE/space3d.a MLXW/mlxw.a
 
 FRAMEWORKS	= -framework OpenGL -framework AppKit
 

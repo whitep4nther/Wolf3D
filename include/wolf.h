@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 01:25:04 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/25 23:58:01 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/26 22:26:04 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,22 @@
 # include <mlxw.h>
 
 # include <fcntl.h>
+# include <math.h>
 
 # define WIN_WIDTH		1400
 # define WIN_HEIGHT		1000
 
 # define PLAYER_FOV		60
 # define PLAYER_HEIGHT	32
+# define PLAYER_SIGHT	700
+# define PLAYER_BASE_SPEED 5
 
 typedef struct			s_player
 {
 	t_point2			pos;
+	t_segment2			sight;
 	double				angle;
+	int					speed;
 	int					height;
 	int					fov;
 	int					current_sector;
@@ -65,12 +70,15 @@ typedef struct			s_map
 
 typedef struct			s_input
 {
+	char				left;
+	char				right;
+	char				up;
+	char				down;
 }						t_input;
 
 typedef struct			s_game
 {
 	t_player			*player;
-	t_input				*input;
 	t_map				*map;
 }						t_game;
 
@@ -100,12 +108,19 @@ typedef struct			s_env
 	t_mlx				*mlx;
 	t_pplane			*pplane;
 	t_game				*game;
+	t_input				*input;
 	t_render			*render;
 }						t_env;
 
+//LOL
+void					draw_wall(t_wall *wall, int color, t_env *e);
+//
+//
 t_env					*init_env(void);
 
 t_map					*load_map(char *map);
+
+void					process(t_env *e);
 
 void					render(t_env *e);
 void					render_sector(t_segment2 *ray, t_sector *sector,
@@ -113,7 +128,17 @@ void					render_sector(t_segment2 *ray, t_sector *sector,
 int						cast_to_sector(t_segment2 *ray, t_sector *sector,
 						t_env *e);
 
-int						key_hook(int keycode, t_env *e);
+void					update_player_sight(t_player *player);
+void					set_player_angle(double angle, t_player *player);
+void					turn_left(double angle, t_player *player);
+void					turn_right(double angle, t_player *player);
+void					move_forward(t_env *e);
+void					move_backward(t_env *e);
+
+int						keypress_hook(int keycode, t_env *e);
+int						keyrelease_hook(int keycode, t_env *e);
+int						mouse_hook(int button, int x, int y, t_env *e);
+int						expose_hook(t_env *e);
 int						loop_hook(t_env *e);
 
 #endif

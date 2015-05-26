@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   update_player_sight.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/24 02:27:39 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/26 19:52:31 by ihermell         ###   ########.fr       */
+/*   Created: 2015/05/26 21:23:13 by ihermell          #+#    #+#             */
+/*   Updated: 2015/05/26 21:47:51 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <wolf.h>
 
-int				main(int ac, char **av)
+void			update_player_sight(t_player *player)
 {
-	t_env		*env;
-
-	env = init_env();
-	env->game->map = load_map("maps/map.w");
-	mlx_loop(env->mlx->mlx);
-	(void)ac;
-	(void)av;
-	return (0);
+	player->sight.points[0].x = player->pos.x;
+	player->sight.points[0].y = player->pos.y;
+	player->sight.points[1].x = player->pos.x + cos(D2R(player->angle)) * PLAYER_SIGHT;
+	player->sight.points[1].y = player->pos.y + sin(D2R(player->angle)) * PLAYER_SIGHT;
 }

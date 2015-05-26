@@ -5,26 +5,31 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/06 03:50:31 by ihermell          #+#    #+#             */
-/*   Updated: 2015/01/21 19:07:34 by ihermell         ###   ########.fr       */
+/*   Created: 2015/05/26 19:37:48 by ihermell          #+#    #+#             */
+/*   Updated: 2015/05/26 19:49:04 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlxdraw.h"
+#include <mlxw.h>
 
-void			vertical_line(t_mlxpoint *p0, t_mlxpoint *p1,
-				int *i, t_mlx *e)
+void			vertical_line(t_mlx *m)
 {
-	DL_Y = p0->y;
-	while (DL_Y < p1->y)
+	int			tmp;
+
+	if (DL_Y > DL_Y1)
 	{
-		mlx_put_pxl_to_img(p0->x, DL_Y,
-		LINE_COLOR, e);
+		tmp = DL_Y;
+		DL_Y = DL_Y1;
+		DL_Y1 = tmp;
+	}
+	while (DL_Y < DL_Y1)
+	{
+		mlx_pixel_put(m->mlx, m->win, DL_X, DL_Y, LINE_COLOR);
 		DL_Y++;
 	}
 }
 
-void			octant_5_6(int *i, t_mlx *e)
+void			octant_5_6(t_mlx *m)
 {
 	if (DL_DX <= DL_DY)
 	{
@@ -33,7 +38,7 @@ void			octant_5_6(int *i, t_mlx *e)
 		DL_DY = DL_DY * 2;
 		while (1)
 		{
-			mlx_put_pxl_to_img(DL_X, DL_Y, LINE_COLOR, e);
+			mlx_pixel_put(m->mlx, m->win, DL_X, DL_Y, LINE_COLOR);
 			if (--DL_X == DL_X1)
 				break ;
 			if ((DL_E = DL_E - DL_DY) >= 0)
@@ -44,17 +49,17 @@ void			octant_5_6(int *i, t_mlx *e)
 		}
 	}
 	else
-		octant_6(i, e);
+		octant_6(m);
 }
 
-void			octant_6(int *i, t_mlx *e)
+void			octant_6( t_mlx *m)
 {
 	DL_E = DL_DY;
 	DL_DY = DL_E * 2;
 	DL_DX = DL_DX * 2;
 	while (1)
 	{
-		mlx_put_pxl_to_img(DL_X, DL_Y, LINE_COLOR, e);
+		mlx_pixel_put(m->mlx, m->win, DL_X, DL_Y, LINE_COLOR);
 		if (--DL_Y == DL_Y1)
 			break ;
 		if ((DL_E = DL_E - DL_DX) >= 0)
@@ -65,7 +70,7 @@ void			octant_6(int *i, t_mlx *e)
 	}
 }
 
-void			octant_7_8(int *i, t_mlx *e)
+void			octant_7_8(t_mlx *m)
 {
 	if (DL_DX >= -DL_DY)
 	{
@@ -74,7 +79,7 @@ void			octant_7_8(int *i, t_mlx *e)
 		DL_DY = DL_DY * 2;
 		while (1)
 		{
-			mlx_put_pxl_to_img(DL_X, DL_Y, LINE_COLOR, e);
+			mlx_pixel_put(m->mlx, m->win, DL_X, DL_Y, LINE_COLOR);
 			if (++DL_X == DL_X1)
 				break ;
 			if ((DL_E = DL_E + DL_DY) < 0)
@@ -85,17 +90,17 @@ void			octant_7_8(int *i, t_mlx *e)
 		}
 	}
 	else
-		octant_7(i, e);
+		octant_7(m);
 }
 
-void			octant_7(int *i, t_mlx *e)
+void			octant_7(t_mlx *m)
 {
 	DL_E = DL_DY;
 	DL_DY = DL_E * 2;
 	DL_DX = DL_DX * 2;
 	while (1)
 	{
-		mlx_put_pxl_to_img(DL_X, DL_Y, LINE_COLOR, e);
+		mlx_pixel_put(m->mlx, m->win, DL_X, DL_Y, LINE_COLOR);
 		if (--DL_Y == DL_Y1)
 			break ;
 		if ((DL_E = DL_E + DL_DX) > 0)
