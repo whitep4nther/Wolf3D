@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 02:31:34 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/27 20:06:05 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/27 21:13:30 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static t_mlx	*init_mlx(void)
 
 	m = (t_mlx*)malloc(sizeof(t_mlx));
 	m->mlx = mlx_init();
+	if (!m->mlx)
+		exit(0);
 	m->win = mlx_new_window(m->mlx, WIN_WIDTH, WIN_HEIGHT, "Wolfie3D");
 	m->img = mlx_new_image(m->mlx, WIN_WIDTH, WIN_HEIGHT);
 	m->img_data = mlx_get_data_addr(m->img, &m->img_bpp, &m->img_size_line,
@@ -69,8 +71,6 @@ t_env			*init_env(void)
 	ft_bzero(env->input, sizeof(t_input));
 	mlx_hook(env->mlx->win, KeyPress, KeyPressMask, keypress_hook, env);
 	mlx_hook(env->mlx->win, KeyRelease, KeyReleaseMask, keyrelease_hook, env);
-	mlx_loop_hook(env->mlx->mlx, loop_hook, env);
 	mlx_mouse_hook(env->mlx->win, mouse_hook, env);
-	mlx_expose_hook(env->mlx->win, expose_hook, env);
 	return (env);
 }

@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/25 22:41:52 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/27 20:23:50 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/27 20:38:44 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void			render(t_env *e)
 	t_segment2	ray;
 	int			current_angle;
 
+	printf("hey\n");
 	r = e->render;
 	r->column = 0;
 	ray.points[0].x = e->game->player->pos.x;
@@ -62,7 +63,7 @@ void			render(t_env *e)
 		r->column++;
 	}
 	mlx_put_image_to_window(e->mlx->mlx, e->mlx->win, e->mlx->img, 0, 0);
-	mlx_clear_image(e->mlx);
+	mlx_clear_image(0x202020, e->mlx);
 	//draw_all_walls(e);
 	//draw_ray(&e->game->player->sight, 0x00FF00, e);
 	//render_sector(&e->game->player->sight, e->game->map->sectors, e);

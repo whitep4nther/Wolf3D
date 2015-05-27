@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/26 22:24:27 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/26 23:42:25 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/27 20:40:02 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void			process(t_env *e)
 {
+	printf("h\n");
 	if (e->input->left == 1)
 		turn_left(3, e->game->player);
 	else if (e->input->right == 1)
