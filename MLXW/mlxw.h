@@ -6,16 +6,18 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/25 23:15:10 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/26 22:25:51 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/27 20:05:07 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MLXW_H
 # define MLXW_H
 
-# include <X.h>
 # include <mlx.h>
 # include <stdlib.h>
+
+# define WIN_WIDTH			1400
+# define WIN_HEIGHT			1000
 
 # define KEY_ESCAPE			53
 # define KEY_LEFT			123
@@ -49,6 +51,8 @@ typedef struct				s_mlx
 	int						img_endian;
 	int						i[10];
 }							t_mlx;
+
+void						mlx_put_pixel_to_img(int x, int y, int color, t_mlx *m);
 
 void						setup_x1_y1_x2(int x1, int y1, int x2, t_mlx *m);
 void						setup_y2_color(int y2, int color, t_mlx *m);

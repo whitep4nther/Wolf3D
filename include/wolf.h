@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 01:25:04 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/26 23:42:28 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/27 20:04:58 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <libft.h>
 # include <space3d.h>
 # include <mlxw.h>
+# include <X.h>
 
 # include <fcntl.h>
 # include <math.h>
@@ -96,10 +97,12 @@ typedef struct			s_w_intersection
 {
 	int					wall;
 	double				distance;
+	t_point2			intersection;
 }						t_w_intersection;
 
 typedef struct			s_render
 {
+	int					column;
 	t_w_intersection	w_intersection[1024];
 }						t_render;
 
@@ -123,6 +126,7 @@ t_map					*load_map(char *map);
 void					process(t_env *e);
 
 void					render(t_env *e);
+void					render_wall(t_w_intersection *intersection, t_env *e);
 void					render_sector(t_segment2 *ray, t_sector *sector,
 						t_env *env);
 int						cast_to_sector(t_segment2 *ray, t_sector *sector,

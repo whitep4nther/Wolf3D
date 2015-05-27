@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 02:31:34 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/26 22:24:14 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/27 20:06:05 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ static t_mlx	*init_mlx(void)
 
 	m = (t_mlx*)malloc(sizeof(t_mlx));
 	m->mlx = mlx_init();
-	m->win = mlx_new_window(m->mlx, 1400, 1000, "Wolfie3D");
+	m->win = mlx_new_window(m->mlx, WIN_WIDTH, WIN_HEIGHT, "Wolfie3D");
+	m->img = mlx_new_image(m->mlx, WIN_WIDTH, WIN_HEIGHT);
+	m->img_data = mlx_get_data_addr(m->img, &m->img_bpp, &m->img_size_line,
+		&m->img_endian);
 	return (m);
 }
 

@@ -6,7 +6,7 @@
 #    By: ihermell <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/07/16 16:31:14 by ihermell          #+#    #+#              #
-#    Updated: 2015/05/26 19:41:11 by ihermell         ###   ########.fr        #
+#    Updated: 2015/05/27 20:03:46 by ihermell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@
 NAME = mlxw.a
 CFLAGS = -Wall -Wextra -Werror
 SOURCES = draw_line.c \
+		  mlx_put_pixel_to_img.c \
 		  octants_1_4.c \
 		  octants_5_8.c
 

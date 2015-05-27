@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_sector.c                                    :+:      :+:    :+:   */
+/*   mlx_put_pixel_to_img.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/24 18:57:07 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/27 19:50:06 by ihermell         ###   ########.fr       */
+/*   Created: 2015/05/27 19:57:31 by ihermell          #+#    #+#             */
+/*   Updated: 2015/05/27 20:21:09 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <wolf.h>
+#include <mlxw.h>
 
-void			render_sector(t_segment2 *ray, t_sector *sector, t_env *e)
+void			mlx_put_pixel_to_img(int x, int y, int color, t_mlx *mlx)
 {
-	int			walls_intersected;
-	int			i;
-	t_render	*r;
+	int			index;
+	char		*ccolor;
 
-	walls_intersected = cast_to_sector(ray, sector, e);
-	i = -1;
-	r = e->render;
-	while (++i < walls_intersected)
-		render_wall(&e->render->w_intersection[i], e);
+	index = mlx->img_size_line * y + (x * mlx->img_bpp / 8);
+	ccolor = (char*)&color;
+	mlx->img_data[index] = ccolor[2];
+	mlx->img_data[index + 1] = ccolor[1];
+	mlx->img_data[index + 2] = ccolor[0];
 }

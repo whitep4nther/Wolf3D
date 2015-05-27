@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/26 19:37:48 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/26 19:49:04 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/27 20:02:58 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void			vertical_line(t_mlx *m)
 	}
 	while (DL_Y < DL_Y1)
 	{
-		mlx_pixel_put(m->mlx, m->win, DL_X, DL_Y, LINE_COLOR);
+		mlx_put_pixel_to_img(DL_X, WIN_HEIGHT - DL_Y, LINE_COLOR, m);
 		DL_Y++;
 	}
 }
@@ -38,7 +38,7 @@ void			octant_5_6(t_mlx *m)
 		DL_DY = DL_DY * 2;
 		while (1)
 		{
-			mlx_pixel_put(m->mlx, m->win, DL_X, DL_Y, LINE_COLOR);
+			mlx_put_pixel_to_img(DL_X, WIN_HEIGHT - DL_Y, LINE_COLOR, m);
 			if (--DL_X == DL_X1)
 				break ;
 			if ((DL_E = DL_E - DL_DY) >= 0)
@@ -59,7 +59,7 @@ void			octant_6( t_mlx *m)
 	DL_DX = DL_DX * 2;
 	while (1)
 	{
-		mlx_pixel_put(m->mlx, m->win, DL_X, DL_Y, LINE_COLOR);
+		mlx_put_pixel_to_img(DL_X, WIN_HEIGHT - DL_Y, LINE_COLOR, m);
 		if (--DL_Y == DL_Y1)
 			break ;
 		if ((DL_E = DL_E - DL_DX) >= 0)
@@ -79,7 +79,7 @@ void			octant_7_8(t_mlx *m)
 		DL_DY = DL_DY * 2;
 		while (1)
 		{
-			mlx_pixel_put(m->mlx, m->win, DL_X, DL_Y, LINE_COLOR);
+			mlx_put_pixel_to_img(DL_X, WIN_HEIGHT - DL_Y, LINE_COLOR, m);
 			if (++DL_X == DL_X1)
 				break ;
 			if ((DL_E = DL_E + DL_DY) < 0)
@@ -100,7 +100,7 @@ void			octant_7(t_mlx *m)
 	DL_DX = DL_DX * 2;
 	while (1)
 	{
-		mlx_pixel_put(m->mlx, m->win, DL_X, DL_Y, LINE_COLOR);
+		mlx_put_pixel_to_img(DL_X, WIN_HEIGHT - DL_Y, LINE_COLOR, m);
 		if (--DL_Y == DL_Y1)
 			break ;
 		if ((DL_E = DL_E + DL_DX) > 0)
