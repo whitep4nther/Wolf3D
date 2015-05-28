@@ -6,7 +6,7 @@
 #    By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/03 22:55:20 by ihermell          #+#    #+#              #
-#    Updated: 2015/05/27 19:50:15 by ihermell         ###   ########.fr        #
+#    Updated: 2015/05/28 00:58:38 by ihermell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC_NAME	=	main.c \
 				player/move_backward.c \
 				\
 				render/render.c \
+				render/render_minimap.c \
 				render/render_wall.c \
 				render/cast_to_sector.c \
 				render/render_sector.c \

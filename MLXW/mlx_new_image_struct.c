@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process.c                                          :+:      :+:    :+:   */
+/*   mlx_new_image_struct.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/26 22:24:27 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/27 23:17:43 by ihermell         ###   ########.fr       */
+/*   Created: 2015/05/28 01:41:32 by ihermell          #+#    #+#             */
+/*   Updated: 2015/05/28 01:44:23 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <wolf.h>
+#include <mlxw.h>
 
-void			process(t_env *e)
+t_mlx_img		*mlx_new_image_struct(void *mlx, int width, int height)
 {
-	if (e->input->left == 1)
-		turn_left(3, e->game->player);
-	else if (e->input->right == 1)
-		turn_right(3, e->game->player);
-	if (e->input->up == 1)
-		move_forward(e);
-	else if (e->input->down == 1)
-		move_backward(e);
+	t_mlx_img	*n;
+
+	n = (t_mlx_img*)malloc(sizeof(t_mlx_img));
+	n->img = mlx_new_image(mlx, width, height);
+	n->img_data = mlx_get_data_addr(n->img, &n->img_bpp, &n->img_size_line,
+		&n->img_endian);
+	n->width = width;
+	n->height = height;
+	return (n);
 }

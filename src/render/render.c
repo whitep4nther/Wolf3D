@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/25 22:41:52 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/27 20:38:44 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/28 02:33:17 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,23 +47,25 @@ void			render(t_env *e)
 {
 	t_render	*r;
 	t_segment2	ray;
-	int			current_angle;
 
-	printf("hey\n");
+	mlx_clear_image(0xf2f2ef00, e->screen);
+	mlx_clear_image(MMAP_BCKGD + MMAP_OPACITY, e->minimap);
 	r = e->render;
 	r->column = 0;
 	ray.points[0].x = e->game->player->pos.x;
 	ray.points[0].y = e->game->player->pos.y;
-	current_angle = true_angle(e->game->player->angle + PLAYER_FOV / 2);
+	e->render->current_angle = true_angle(e->game->player->angle + PLAYER_FOV / 2);
 	while (r->column < WIN_WIDTH)
 	{
-		set_ray(current_angle, &ray);
+		set_ray(e->render->current_angle, &ray);
 		render_sector(&ray, e->game->map->sectors, e);
-		current_angle += e->pplane->angle_btw_rays;
+		render_minimap_ray(&ray, e);
+		e->render->current_angle = true_angle(e->render->current_angle -
+			e->pplane->angle_btw_rays);
 		r->column++;
 	}
-	mlx_put_image_to_window(e->mlx->mlx, e->mlx->win, e->mlx->img, 0, 0);
-	mlx_clear_image(0x202020, e->mlx);
+	mlx_put_image_to_window(e->mlx->mlx, e->mlx->win, e->screen->img, 0, 0);
+	render_minimap(e);
 	//draw_all_walls(e);
 	//draw_ray(&e->game->player->sight, 0x00FF00, e);
 	//render_sector(&e->game->player->sight, e->game->map->sectors, e);

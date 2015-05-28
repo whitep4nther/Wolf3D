@@ -6,14 +6,15 @@
 #    By: ihermell <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/07/16 16:31:14 by ihermell          #+#    #+#              #
-#    Updated: 2015/05/27 20:29:38 by ihermell         ###   ########.fr        #
+#    Updated: 2015/05/28 01:46:12 by ihermell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY: clean, all, re, reclean, fclean
 NAME = mlxw.a
 CFLAGS = -Wall -Wextra -Werror
-SOURCES = draw_line.c \
+SOURCES = draw_line_to_img.c \
+		  mlx_new_image_struct.c \
 		  mlx_put_pixel_to_img.c \
 		  mlx_clear_image.c \
 		  octants_1_4.c \

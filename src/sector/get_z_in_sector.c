@@ -1,38 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_z_in_sector.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/24 02:27:39 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/28 00:37:24 by ihermell         ###   ########.fr       */
+/*   Created: 2015/05/28 02:33:41 by ihermell          #+#    #+#             */
+/*   Updated: 2015/05/28 02:41:06 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <wolf.h>
-/*
-int				test(int keycode, void *param)
-{
-	if (keycode == KEY_ESCAPE)
-		exit(0);
-	(void)param;
-	return(0);
-}*/
 
-int				main(int ac, char **av)
+double			get_z_in_sector(t_sector *sector, double x, double y)
 {
-	t_env		*env;
-	/*void		*mlx;
-	void		*win;*/
+	t_point2	relative;
 
-	env = init_env();
-	env->game->map = load_map("maps/map.w");
-	/*mlx = mlx_init();
-	win = mlx_new_window(mlx, 400, 400, "lol");
-	mlx_key_hook(win, test, mlx);*/
-	mlx_loop(env->mlx->mlx);
-	(void)ac;
-	(void)av;
-	return (0);
+	relative.x = x - sector->reference.x;
+	relative.y = y - sector->reference.y;
+	return (sector->reference.z + relative.x * sector->z1
+		+ relative.y * sector->z2);
 }

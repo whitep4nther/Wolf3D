@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_line.c                                        :+:      :+:    :+:   */
+/*   draw_line_to_img.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/06 03:29:42 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/27 19:40:46 by ihermell         ###   ########.fr       */
+/*   Created: 2015/05/28 00:05:25 by ihermell          #+#    #+#             */
+/*   Updated: 2015/05/28 01:14:53 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlxw.h>
 
-void			setup_x1_y1_x2(int x1, int y1, int x2, t_mlx *m)
+void			setup_x1_y1_x2(int x1, int y1, int x2, int mlx_i[10])
 {
 	DL_X = x1;
 	DL_X0 = x1;
@@ -21,34 +21,34 @@ void			setup_x1_y1_x2(int x1, int y1, int x2, t_mlx *m)
 	DL_X1 = x2;
 }
 
-void			setup_y2_color(int y2, int color, t_mlx *m)
+void			setup_y2_color(int y2, int color, int mlx_i[10])
 {
 	DL_Y1 = y2;
 	LINE_COLOR = color;
 }
 
-void			draw_line(t_mlx *m)
+void			draw_line_to_img(t_mlx_img *img, int mlx_i[10])
 {
 	if ((DL_DX = DL_X1 - DL_X0) != 0)
 		if (DL_DX > 0)
 			if ((DL_DY = DL_Y1 - DL_Y0) != 0)
 				if (DL_DY > 0)
-					octant_1_2(m);
+					octant_1_2(img, mlx_i);
 				else
-					octant_7_8(m);
+					octant_7_8(img, mlx_i);
 			else
-				horizontal_line(m);
+				horizontal_line(img, mlx_i);
 		else
 			if ((DL_DY = DL_Y1 - DL_Y0) != 0)
 				if (DL_DY > 0)
-					octant_3_4(m);
+					octant_3_4(img, mlx_i);
 				else
-					octant_5_6(m);
+					octant_5_6(img, mlx_i);
 			else
-				horizontal_line(m);
+				horizontal_line(img, mlx_i);
 	else
 		if ((DL_DY = DL_Y1 - DL_Y0) > 0)
-			vertical_line(m);
+			vertical_line(img, mlx_i);
 		else
-			vertical_line(m);
+			vertical_line(img, mlx_i);
 }

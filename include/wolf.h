@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 01:25:04 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/27 21:13:44 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/28 02:42:48 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,18 @@
 # define WIN_WIDTH		1400
 # define WIN_HEIGHT		1000
 
+# define MMAP_BCKGD		0x33333300
+# define MMAP_WIDTH		300
+# define MMAP_HEIGHT	200
+# define MMAP_OPACITY	0x99
+# define MMAP_RATIO		0.2
+# define MMAP_PLAYER_COLOR 0xef323200
+# define MMAP_WALL_COLOR 0xffffff00
+# define MMAP_RAY_COLOR	0xFF0000C8
+
 # define PLAYER_FOV		60
 # define PLAYER_HEIGHT	32
-# define PLAYER_SIGHT	700
+# define PLAYER_SIGHT	1000
 # define PLAYER_BASE_SPEED 5
 
 typedef struct			s_player
@@ -97,22 +106,27 @@ typedef struct			s_w_intersection
 {
 	int					wall;
 	double				distance;
+	double				cos_distance;
 	t_point2			intersection;
 }						t_w_intersection;
 
 typedef struct			s_render
 {
 	int					column;
+	double				current_angle;
 	t_w_intersection	w_intersection[1024];
 }						t_render;
 
 typedef struct			s_env
 {
 	t_mlx				*mlx;
+	t_mlx_img			*screen;
+	t_mlx_img			*minimap;
 	t_pplane			*pplane;
 	t_game				*game;
 	t_input				*input;
 	t_render			*render;
+	int					ints[10];
 }						t_env;
 
 //LOL
@@ -125,12 +139,17 @@ t_map					*load_map(char *map);
 
 void					process(t_env *e);
 
+void					render_minimap(t_env *e);
+void					render_minimap_ray(t_segment2 *ray, t_env *e);
+
 void					render(t_env *e);
 void					render_wall(t_w_intersection *intersection, t_env *e);
 void					render_sector(t_segment2 *ray, t_sector *sector,
 						t_env *env);
 int						cast_to_sector(t_segment2 *ray, t_sector *sector,
 						t_env *e);
+
+double					get_z_in_sector(`
 
 void					update_player_sight(t_player *player);
 void					set_player_angle(double angle, t_player *player);
