@@ -6,7 +6,7 @@
 #    By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/03 22:55:20 by ihermell          #+#    #+#              #
-#    Updated: 2015/05/28 00:58:38 by ihermell         ###   ########.fr        #
+#    Updated: 2015/05/28 02:55:26 by ihermell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,8 @@ SRC_NAME	=	main.c \
 				render/render_wall.c \
 				render/cast_to_sector.c \
 				render/render_sector.c \
+				\
+				sector/get_z_in_sector.c \
 				\
 				mlx_hooks/keypress_hook.c \
 				mlx_hooks/keyrelease_hook.c \

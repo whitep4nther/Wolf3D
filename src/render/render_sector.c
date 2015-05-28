@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 18:57:07 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/28 00:41:04 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/28 02:57:27 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void			render_sector(t_segment2 *ray, t_sector *sector, t_env *e)
 	walls_intersected = cast_to_sector(ray, sector, e);
 	i = -1;
 	r = e->render;
+	r->sector = sector;
 	while (++i < walls_intersected)
 		render_wall(&e->render->w_intersection[i], e);
 }

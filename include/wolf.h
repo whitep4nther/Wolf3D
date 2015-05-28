@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 01:25:04 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/28 02:42:48 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/28 02:58:44 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ typedef struct			s_render
 {
 	int					column;
 	double				current_angle;
+	t_sector			*sector;
 	t_w_intersection	w_intersection[1024];
 }						t_render;
 
@@ -132,7 +133,6 @@ typedef struct			s_env
 //LOL
 void					draw_wall(t_wall *wall, int color, t_env *e);
 //
-//
 t_env					*init_env(void);
 
 t_map					*load_map(char *map);
@@ -149,7 +149,7 @@ void					render_sector(t_segment2 *ray, t_sector *sector,
 int						cast_to_sector(t_segment2 *ray, t_sector *sector,
 						t_env *e);
 
-double					get_z_in_sector(`
+double					get_z_in_sector(t_sector *sector, double x, double y);
 
 void					update_player_sight(t_player *player);
 void					set_player_angle(double angle, t_player *player);

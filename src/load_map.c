@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 03:44:04 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/24 05:44:59 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/28 03:04:08 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ static t_list	*load_sectors(t_list *file, t_map *map, int nb)
 		file = free_and_advance(file);
 		ft_free_str_tab(split);
 		split = ft_strsplit(file->content, ' ');
-		map->sectors[i].z1 = ft_atoi(split[0]);
-		map->sectors[i].z2 = ft_atoi(split[1]);
+		map->sectors[i].z1 = ft_atoi(split[0]) / 1000.0;
+		map->sectors[i].z2 = ft_atoi(split[1]) / 1000.0;
 		file = free_and_advance(file);
 		ft_free_str_tab(split);
 		split = ft_strsplit(file->content, ' ');
