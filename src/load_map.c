@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 03:44:04 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/28 03:04:08 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/29 01:20:59 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ static t_list	*load_walls(t_list *file, t_map *map, int nb)
 	i = -1;
 	while (++i < nb)
 	{
+		map->walls[i].id = i;
+		map->walls[i].column_rendered = -1;
 		split = ft_strsplit(file->content, ' ');
 		map->walls[i].seg = fill_segment2(ft_atoi(split[0]),
 			ft_atoi(split[1]), ft_atoi(split[2]), ft_atoi(split[3]));
@@ -92,6 +94,7 @@ static t_list	*load_sectors(t_list *file, t_map *map, int nb)
 	i = -1;
 	while (++i < nb)
 	{
+		map->sectors[i].id = i;
 		split = ft_strsplit(file->content, ' ');
 		map->sectors[i].reference.x = ft_atoi(split[0]);
 		map->sectors[i].reference.y = ft_atoi(split[1]);

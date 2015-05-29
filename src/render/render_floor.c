@@ -1,41 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keypress_hook.c                                    :+:      :+:    :+:   */
+/*   render_floor.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/26 22:03:29 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/29 03:30:54 by ihermell         ###   ########.fr       */
+/*   Created: 2015/05/29 02:13:53 by ihermell          #+#    #+#             */
+/*   Updated: 2015/05/29 05:17:53 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <wolf.h>
 
-int				keypress_hook(int keycode, t_env *e)
+void			render_floor(int from, t_sector *sector, t_env *e)
 {
-	if (keycode == KEY_ESCAPE)
-		exit(0);
-	else if (keycode == KEY_LEFT)
-	{
-		e->input->left = 1;
-		e->input->right = 0;
-	}
-	else if (keycode == KEY_RIGHT)
-	{
-		e->input->left = 0;
-		e->input->right = 1;
-	}
-	else if (keycode == KEY_UP)
-	{
-		e->input->up = 1;
-		e->input->down = 0;
-	}
-	else if (keycode == KEY_DOWN)
-	{
-		e->input->up = 0;
-		e->input->down = 1;
-	}
-	return (0);
-	(void)e;
+	if (from <= e->render->current_top)
+		return ;
+	setup_x1_y1_x2(e->render->column, e->render->current_top, e->render->column,
+		e->mlx->mlx_i);
+	setup_y2_color(from, 0xCCCCCC00, e->mlx->mlx_i);
+	draw_line_to_img(e->screen, e->mlx->mlx_i);
+	e->render->current_top = from;
+	(void)sector;
 }

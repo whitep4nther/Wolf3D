@@ -1,41 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keypress_hook.c                                    :+:      :+:    :+:   */
+/*   next_sector.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/26 22:03:29 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/29 03:30:54 by ihermell         ###   ########.fr       */
+/*   Created: 2015/05/29 01:09:11 by ihermell          #+#    #+#             */
+/*   Updated: 2015/05/29 01:26:24 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <wolf.h>
 
-int				keypress_hook(int keycode, t_env *e)
+t_sector		*next_sector(t_wall *wall, t_sector *sector, t_sector *sectors)
 {
-	if (keycode == KEY_ESCAPE)
-		exit(0);
-	else if (keycode == KEY_LEFT)
-	{
-		e->input->left = 1;
-		e->input->right = 0;
-	}
-	else if (keycode == KEY_RIGHT)
-	{
-		e->input->left = 0;
-		e->input->right = 1;
-	}
-	else if (keycode == KEY_UP)
-	{
-		e->input->up = 1;
-		e->input->down = 0;
-	}
-	else if (keycode == KEY_DOWN)
-	{
-		e->input->up = 0;
-		e->input->down = 1;
-	}
-	return (0);
-	(void)e;
+	if (wall->sectors_id[0] == sector->id)
+		return (sectors + wall->sectors_id[1]);
+	return (sectors + wall->sectors_id[0]);
 }

@@ -6,7 +6,7 @@
 #    By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/03 22:55:20 by ihermell          #+#    #+#              #
-#    Updated: 2015/05/28 02:55:26 by ihermell         ###   ########.fr        #
+#    Updated: 2015/05/29 02:19:34 by ihermell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,8 @@ SRC_NAME	=	main.c \
 				player/move_backward.c \
 				\
 				render/render.c \
+				render/render_step_up.c \
+				render/render_floor.c \
 				render/render_minimap.c \
 				render/render_wall.c \
 				render/cast_to_sector.c \
@@ -40,11 +42,16 @@ SRC_NAME	=	main.c \
 				\
 				sector/get_z_in_sector.c \
 				\
+				walls/next_sector.c \
+				\
 				mlx_hooks/keypress_hook.c \
 				mlx_hooks/keyrelease_hook.c \
 				mlx_hooks/mouse_hook.c \
 				mlx_hooks/expose_hook.c \
-				mlx_hooks/loop_hook.c
+				mlx_hooks/loop_hook.c \
+				\
+				quicksort/quicksort.c \
+				qs_walls_cmp.c
 
 SRC			+= $(addprefix $(SRC_DIR),$(SRC_NAME))
 

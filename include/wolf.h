@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 01:25:04 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/28 02:58:44 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/29 05:50:48 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,16 @@
 //
 # include <stdio.h>
 
-# include <get_next_line.h>
-# include <libft.h>
-# include <space3d.h>
-# include <mlxw.h>
-# include <X.h>
-
 # include <fcntl.h>
 # include <math.h>
+# include <X.h>
+
+# include <space3d.h>
+# include <mlxw.h>
+# include <get_next_line.h>
+# include <libft.h>
+
+# include <quicksort.h>
 
 # define WIN_WIDTH		1400
 # define WIN_HEIGHT		1000
@@ -32,7 +34,7 @@
 # define MMAP_WIDTH		300
 # define MMAP_HEIGHT	200
 # define MMAP_OPACITY	0x99
-# define MMAP_RATIO		0.2
+# define MMAP_RATIO		0.1
 # define MMAP_PLAYER_COLOR 0xef323200
 # define MMAP_WALL_COLOR 0xffffff00
 # define MMAP_RAY_COLOR	0xFF0000C8
@@ -41,6 +43,10 @@
 # define PLAYER_HEIGHT	32
 # define PLAYER_SIGHT	1000
 # define PLAYER_BASE_SPEED 5
+
+# define LEFT_PORTAL	1
+# define RIGHT_PORTAL	2
+# define PORTAL_WIDTH	64
 
 typedef struct			s_player
 {
@@ -53,16 +59,26 @@ typedef struct			s_player
 	int					current_sector;
 }						t_player;
 
+typedef struct			s_portal
+{
+	int					wall;
+	int					sector;
+	t_point2			pos;
+}						t_portal;
+
 typedef struct			s_wall
 {
+	int					id;
 	t_segment2			seg;
 	int					height;
 	int					is_portal;
 	int					sectors_id[2];
+	int					column_rendered;
 }						t_wall;
 
 typedef struct			s_sector
 {
+	int					id;
 	t_point3			reference;
 	double				z1;
 	double				z2;
@@ -90,6 +106,8 @@ typedef struct			s_game
 {
 	t_player			*player;
 	t_map				*map;
+	t_portal			*lportal;
+	t_portal			*rportal;
 }						t_game;
 
 typedef struct			s_pplane
@@ -108,14 +126,23 @@ typedef struct			s_w_intersection
 	double				distance;
 	double				cos_distance;
 	t_point2			intersection;
+	double				coef;
+	int					projected_y1;
+	int					projected_y2;
+	int					projected_height;
 }						t_w_intersection;
 
 typedef struct			s_render
 {
 	int					column;
-	double				current_angle;
 	t_sector			*sector;
+	double				current_angle;
+	int					current_top;
 	t_w_intersection	w_intersection[1024];
+	t_sort				sort[1024];
+	t_w_intersection	*tmp_inter;
+	t_wall				*tmp_wall;
+	t_sector			*tmp_sector;
 }						t_render;
 
 typedef struct			s_env
@@ -145,9 +172,14 @@ void					render_minimap_ray(t_segment2 *ray, t_env *e);
 void					render(t_env *e);
 void					render_wall(t_w_intersection *intersection, t_env *e);
 void					render_sector(t_segment2 *ray, t_sector *sector,
-						t_env *env);
+						double base_distance, t_env *env);
 int						cast_to_sector(t_segment2 *ray, t_sector *sector,
-						t_env *e);
+						double base_distance, t_env *e);
+t_sector				*next_sector(t_wall *wall, t_sector *c_sector,
+						t_sector *sectors);
+void					render_step_up(t_sector *from, t_sector *to,
+						t_w_intersection *w_inter, t_env *e);
+void					render_floor(int from, t_sector *sector, t_env *e);
 
 double					get_z_in_sector(t_sector *sector, double x, double y);
 
@@ -163,5 +195,7 @@ int						keyrelease_hook(int keycode, t_env *e);
 int						mouse_hook(int button, int x, int y, t_env *e);
 int						expose_hook(t_env *e);
 int						loop_hook(t_env *e);
+
+double					qs_walls_cmp(void *w1, void *w2);
 
 #endif

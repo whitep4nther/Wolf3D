@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   turn_left.c                                        :+:      :+:    :+:   */
+/*   quicksort.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/26 21:41:53 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/29 03:30:49 by ihermell         ###   ########.fr       */
+/*   Created: 2015/05/28 23:32:04 by ihermell          #+#    #+#             */
+/*   Updated: 2015/05/29 00:55:44 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <wolf.h>
+#ifndef QUICKSORT_H
+# define QUICKSORT_H
 
-void		turn_left(double angle, t_player *player)
+# define MAX_LEVELS		1000
+
+typedef struct			s_sort
 {
-	set_player_angle(player->angle + angle, player);
-}
+	void				*content;
+}						t_sort;
+
+void					quicksort(t_sort *tab, int start, int end,
+						double (*cmp)(void *, void *));
+
+#endif
