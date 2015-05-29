@@ -6,7 +6,7 @@
 #    By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/03 22:55:20 by ihermell          #+#    #+#              #
-#    Updated: 2015/05/29 02:19:34 by ihermell         ###   ########.fr        #
+#    Updated: 2015/05/29 07:17:00 by ihermell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC_NAME	=	main.c \
 				player/move_forward.c \
 				player/move_backward.c \
 				\
+				render/set_ray.c \
 				render/render.c \
 				render/render_step_up.c \
 				render/render_floor.c \
@@ -39,6 +40,9 @@ SRC_NAME	=	main.c \
 				render/render_wall.c \
 				render/cast_to_sector.c \
 				render/render_sector.c \
+				render/render_through_portal.c \
+				\
+				portals/ray_in_portal.c \
 				\
 				sector/get_z_in_sector.c \
 				\

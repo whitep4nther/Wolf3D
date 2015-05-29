@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 21:14:44 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/29 05:43:20 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/29 08:30:33 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void		fill_wall_intersection(t_point2 *intersection,
 	coef = e->pplane->distance_to_pp / w_inter->cos_distance;
 	w_inter->projected_height = round(e->game->map->walls[w_inter->wall].height
 		* coef);
-	w_inter->projected_y1 = round(e->pplane->center_y - (PLAYER_HEIGHT - get_z_in_sector(e->render->sector, intersection->x, intersection->y)) * coef);
+	w_inter->projected_y1 = round(e->pplane->center_y - (PLAYER_HEIGHT - get_z_in_sector(e->render->tmp_sector, intersection->x, intersection->y)) * coef);
 	w_inter->projected_y2 = w_inter->projected_y1 + w_inter->projected_height;
 }
 
@@ -48,6 +48,7 @@ int				cast_to_sector(t_segment2 *ray, t_sector *sector,
 			&e->game->map->walls[sector->walls[i]].seg, intersection))
 		{
 			w_inter->wall = sector->walls[i];
+			e->render->tmp_sector = sector;
 			fill_wall_intersection(intersection, w_inter, base_distance, e);
 			e->render->sort[walls_intersected].content = w_inter;
 			walls_intersected++;

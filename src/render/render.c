@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/25 22:41:52 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/29 05:43:39 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/29 08:28:54 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,6 @@ void			draw_all_walls(t_env *e)
 		draw_wall(&map->walls[i], 0xFFC549, e);
 }
 */
-static void		set_ray(double angle, t_segment2 *ray)
-{
-	ray->points[1].x = ray->points[0].x + cos(D2R(angle)) * PLAYER_SIGHT;
-	ray->points[1].y = ray->points[0].y + sin(D2R(angle)) * PLAYER_SIGHT;
-}
 /*
 static void		reset_render(t_render *render)
 {

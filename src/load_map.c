@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 03:44:04 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/29 01:20:59 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/29 07:35:08 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,11 @@ static t_list	*load_walls(t_list *file, t_map *map, int nb)
 		split = ft_strsplit(file->content, ' ');
 		map->walls[i].seg = fill_segment2(ft_atoi(split[0]),
 			ft_atoi(split[1]), ft_atoi(split[2]), ft_atoi(split[3]));
+		map->walls[i].angle = true_angle(R2D(atan2(ft_atoi(split[3]) - ft_atoi(split[1]),
+			ft_atoi(split[2]) - ft_atoi(split[0]))));
+		map->walls[i].cos = cos(D2R(map->walls[i].angle));
+		map->walls[i].sin = sin(D2R(map->walls[i].angle));
+		printf("angle %lf, cos %lf, sin %lf\n", map->walls[i].angle, map->walls[i].cos, map->walls[i].sin);
 		file = free_and_advance(file);
 		ft_free_str_tab(split);
 		map->walls[i].height = ft_atoi(file->content);

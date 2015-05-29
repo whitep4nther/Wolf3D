@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 01:25:04 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/29 05:50:48 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/29 08:00:17 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,13 @@ typedef struct			s_player
 	int					current_sector;
 }						t_player;
 
-typedef struct			s_portal
-{
-	int					wall;
-	int					sector;
-	t_point2			pos;
-}						t_portal;
-
 typedef struct			s_wall
 {
 	int					id;
 	t_segment2			seg;
+	double				angle;
+	double				cos;
+	double				sin;
 	int					height;
 	int					is_portal;
 	int					sectors_id[2];
@@ -85,6 +81,13 @@ typedef struct			s_sector
 	int					*walls;
 	int					nb_walls;
 }						t_sector;
+
+typedef struct			s_portal
+{
+	t_wall				*wall;
+	t_sector			*sector;
+	t_point2			pos;
+}						t_portal;
 
 typedef struct			s_map
 {
@@ -135,7 +138,6 @@ typedef struct			s_w_intersection
 typedef struct			s_render
 {
 	int					column;
-	t_sector			*sector;
 	double				current_angle;
 	int					current_top;
 	t_w_intersection	w_intersection[1024];
@@ -166,6 +168,8 @@ t_map					*load_map(char *map);
 
 void					process(t_env *e);
 
+void					set_ray(double angle, t_segment2 *ray);
+
 void					render_minimap(t_env *e);
 void					render_minimap_ray(t_segment2 *ray, t_env *e);
 
@@ -180,8 +184,12 @@ t_sector				*next_sector(t_wall *wall, t_sector *c_sector,
 void					render_step_up(t_sector *from, t_sector *to,
 						t_w_intersection *w_inter, t_env *e);
 void					render_floor(int from, t_sector *sector, t_env *e);
+void					render_through_portal(int which, double base_distance, t_env *e);
 
 double					get_z_in_sector(t_sector *sector, double x, double y);
+
+int						ray_in_portal(t_portal *portal, t_wall *wall, double x,
+						double y);
 
 void					update_player_sight(t_player *player);
 void					set_player_angle(double angle, t_player *player);

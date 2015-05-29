@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 02:31:34 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/29 05:51:03 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/29 07:51:57 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static t_game	*init_game(void)
 	game->map = NULL;
 	game->player = (t_player*)malloc(sizeof(t_player));
 	fill_point2(207, 596.7, &game->player->pos);
-	game->player->angle = 262;
+	game->player->angle = 330;
 	game->player->fov = PLAYER_FOV;
 	game->player->height = PLAYER_HEIGHT;
 	game->player->current_sector = 0;
@@ -41,10 +41,10 @@ static t_game	*init_game(void)
 	update_player_sight(game->player);
 	game->lportal = (t_portal*)malloc(sizeof(t_portal));
 	game->rportal = (t_portal*)malloc(sizeof(t_portal));
-	game->lportal->wall = -1;
-	game->rportal->wall = -1;
-	game->lportal->sector = -1;
-	game->rportal->sector = -1;
+	game->lportal->wall = NULL;
+	game->rportal->wall = NULL;
+	game->lportal->sector = NULL;
+	game->rportal->sector = NULL;
 	return (game);
 }
 

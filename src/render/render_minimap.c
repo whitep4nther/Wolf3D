@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/28 00:53:43 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/28 02:31:04 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/29 07:55:59 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void			render_minimap_ray(t_segment2 *ray, t_env *e)
 	t_player	*p;
 
 	p = e->game->player;
-	e->ints[0] = MMAP_WIDTH / 2;
-	e->ints[1] = MMAP_HEIGHT / 2;
+	e->ints[0] = (ray->points[0].x - p->pos.x) * MMAP_RATIO + MMAP_WIDTH / 2;
+	e->ints[1] = (ray->points[0].y - p->pos.y) * MMAP_RATIO + MMAP_HEIGHT / 2;
 	e->ints[2] = (ray->points[1].x - p->pos.x) * MMAP_RATIO + MMAP_WIDTH / 2;
 	e->ints[3] = (ray->points[1].y - p->pos.y) * MMAP_RATIO + MMAP_HEIGHT / 2;
 	setup_x1_y1_x2(e->ints[0], e->ints[1], e->ints[2], e->mlx->mlx_i);
