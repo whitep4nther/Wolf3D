@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 01:25:04 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/29 08:00:17 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/30 03:27:42 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,10 @@
 # define PLAYER_SIGHT	1000
 # define PLAYER_BASE_SPEED 5
 
-# define LEFT_PORTAL	1
-# define RIGHT_PORTAL	2
 # define PORTAL_WIDTH	64
 
-typedef struct			s_player
-{
-	t_point2			pos;
-	t_segment2			sight;
-	double				angle;
-	int					speed;
-	int					height;
-	int					fov;
-	int					current_sector;
-}						t_player;
+# define DO_CALCULATION	1
+# define NO_CALCULATION	0
 
 typedef struct			s_wall
 {
@@ -70,6 +60,7 @@ typedef struct			s_wall
 	int					is_portal;
 	int					sectors_id[2];
 	int					column_rendered;
+	char				depth_rendered;
 }						t_wall;
 
 typedef struct			s_sector
@@ -78,7 +69,7 @@ typedef struct			s_sector
 	t_point3			reference;
 	double				z1;
 	double				z2;
-	int					*walls;
+	t_wall				**walls;
 	int					nb_walls;
 }						t_sector;
 
@@ -87,6 +78,9 @@ typedef struct			s_portal
 	t_wall				*wall;
 	t_sector			*sector;
 	t_point2			pos;
+	double				angle;
+	double				cos;
+	double				sin;
 }						t_portal;
 
 typedef struct			s_map
@@ -105,14 +99,6 @@ typedef struct			s_input
 	char				down;
 }						t_input;
 
-typedef struct			s_game
-{
-	t_player			*player;
-	t_map				*map;
-	t_portal			*lportal;
-	t_portal			*rportal;
-}						t_game;
-
 typedef struct			s_pplane
 {
 	int					width;
@@ -125,7 +111,7 @@ typedef struct			s_pplane
 
 typedef struct			s_w_intersection
 {
-	int					wall;
+	t_wall				*wall;
 	double				distance;
 	double				cos_distance;
 	t_point2			intersection;
@@ -137,15 +123,46 @@ typedef struct			s_w_intersection
 
 typedef struct			s_render
 {
-	int					column;
-	double				current_angle;
-	int					current_top;
-	t_w_intersection	w_intersection[1024];
-	t_sort				sort[1024];
+	t_segment2			ray;
+	double				ray_angle;
+	double				reference_angle;
+	double				cos_ray_ref;
+	double				base_distance;
+	char				depth;
+	t_point2			reference_pos;
+	t_w_intersection	w_intersection[512];
+	t_sort				sort[512];
 	t_w_intersection	*tmp_inter;
 	t_wall				*tmp_wall;
 	t_sector			*tmp_sector;
 }						t_render;
+
+typedef struct			s_player
+{
+	t_point2			pos;
+	t_segment2			sight;
+	double				angle;
+	int					speed;
+	int					height;
+	int					fov;
+	t_sector			*current_sector;
+	t_w_intersection	walls[101];
+	t_sort				sort[101];
+}						t_player;
+
+typedef struct			s_game
+{
+	t_player			*player;
+	t_map				*map;
+	t_portal			*lportal;
+	t_portal			*rportal;
+}						t_game;
+
+typedef struct			s_g_render
+{
+	int					column;
+	int					current_top;
+}						t_g_render;
 
 typedef struct			s_env
 {
@@ -155,7 +172,7 @@ typedef struct			s_env
 	t_pplane			*pplane;
 	t_game				*game;
 	t_input				*input;
-	t_render			*render;
+	t_g_render			*g_render;
 	int					ints[10];
 }						t_env;
 
@@ -163,6 +180,10 @@ typedef struct			s_env
 void					draw_wall(t_wall *wall, int color, t_env *e);
 //
 t_env					*init_env(void);
+void					init_render_struct(double ray_angle, double ref_angle,
+						t_point2 *ref_pos, t_render *r);
+void					set_render_struct_ray_angle(double ray_angle,
+						t_render *r);
 
 t_map					*load_map(char *map);
 
@@ -173,23 +194,28 @@ void					set_ray(double angle, t_segment2 *ray);
 void					render_minimap(t_env *e);
 void					render_minimap_ray(t_segment2 *ray, t_env *e);
 
+int						cast_to_sector_walls(t_segment2 *ray, t_sector *sector,
+						t_w_intersection *w, t_sort *s);
+void					process_walls_intersections(int nb_walls, t_sector *sector,
+						t_render *r, t_env *e);
+
 void					render(t_env *e);
 void					render_wall(t_w_intersection *intersection, t_env *e);
-void					render_sector(t_segment2 *ray, t_sector *sector,
-						double base_distance, t_env *env);
-int						cast_to_sector(t_segment2 *ray, t_sector *sector,
-						double base_distance, t_env *e);
+void					render_sector(t_sector *sector, t_render *r, t_env *env);
 t_sector				*next_sector(t_wall *wall, t_sector *c_sector,
 						t_sector *sectors);
 void					render_step_up(t_sector *from, t_sector *to,
 						t_w_intersection *w_inter, t_env *e);
 void					render_floor(int from, t_sector *sector, t_env *e);
-void					render_through_portal(int which, double base_distance, t_env *e);
+void					render_through_portal(t_portal *from, t_portal *to,
+						t_render *r, t_env *e);
 
 double					get_z_in_sector(t_sector *sector, double x, double y);
 
-int						ray_in_portal(t_portal *portal, t_wall *wall, double x,
-						double y);
+int						point_in_portal(t_portal *portal, t_point2 *p);
+t_portal				*the_other_portal(t_portal *from, t_env *e);
+void					get_portal_new_pos(t_portal *from, t_point2 *inter,
+						t_portal *to, t_point2 *new_pos);
 
 void					update_player_sight(t_player *player);
 void					set_player_angle(double angle, t_player *player);

@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_forward.c                                     :+:      :+:    :+:   */
+/*   init_render_struct.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/26 21:44:37 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/30 02:43:11 by ihermell         ###   ########.fr       */
+/*   Created: 2015/05/29 23:27:20 by ihermell          #+#    #+#             */
+/*   Updated: 2015/05/30 02:43:05 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <wolf.h>
 
-void			move_forward(t_env *e)
+void			init_render_struct(double ray_angle, double reference_angle,
+				t_point2 *reference_pos, t_render *render)
 {
-	t_player	*player;
-	//t_segment2	ray;
-
-	player = e->game->player;
-	//ray.points[0] = player->pos;
-	//set_ray(player->angle, player->speed, &ray);
-	player->pos.x = player->pos.x + cos(D2R(player->angle)) * player->speed;
-	player->pos.y = player->pos.y + sin(D2R(player->angle)) * player->speed;
-	update_player_sight(player);
+	render->reference_angle = reference_angle;
+	render->reference_pos = *reference_pos;
+	render->tmp_inter = NULL;
+	render->tmp_wall = NULL;
+	render->tmp_sector = NULL;
+	render->ray.points[0] = *reference_pos;
+	set_render_struct_ray_angle(ray_angle, render);
 }

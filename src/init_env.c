@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 02:31:34 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/29 07:51:57 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/30 02:36:33 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static t_game	*init_game(void)
 	game->player->angle = 330;
 	game->player->fov = PLAYER_FOV;
 	game->player->height = PLAYER_HEIGHT;
-	game->player->current_sector = 0;
 	game->player->speed = PLAYER_BASE_SPEED;
 	update_player_sight(game->player);
 	game->lportal = (t_portal*)malloc(sizeof(t_portal));
@@ -69,8 +68,8 @@ t_env			*init_env(void)
 	env = (t_env*)malloc(sizeof(t_env));
 	env->game = init_game();
 	env->pplane = init_pplane();
-	env->render = (t_render*)malloc(sizeof(t_render));
-	ft_bzero(env->render, sizeof(t_render));
+	env->g_render = (t_g_render*)malloc(sizeof(t_g_render));
+	ft_bzero(env->g_render, sizeof(t_g_render));
 	env->input = (t_input*)malloc(sizeof(t_input));
 	ft_bzero(env->input, sizeof(t_input));
 	init_mlx(env);

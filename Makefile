@@ -6,7 +6,7 @@
 #    By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/03 22:55:20 by ihermell          #+#    #+#              #
-#    Updated: 2015/05/29 07:17:00 by ihermell         ###   ########.fr        #
+#    Updated: 2015/05/30 03:21:19 by ihermell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,17 +32,23 @@ SRC_NAME	=	main.c \
 				player/move_forward.c \
 				player/move_backward.c \
 				\
-				render/set_ray.c \
+				cast/cast_to_sector_walls.c \
+				\
 				render/render.c \
 				render/render_step_up.c \
 				render/render_floor.c \
 				render/render_minimap.c \
 				render/render_wall.c \
-				render/cast_to_sector.c \
+				render/process_walls_intersections.c \
 				render/render_sector.c \
 				render/render_through_portal.c \
 				\
-				portals/ray_in_portal.c \
+				render_struct/init_render_struct.c \
+				render_struct/set_render_struct_ray_angle.c \
+				\
+				portals/point_in_portal.c \
+				portals/the_other_portal.c \
+				portals/get_portal_new_pos.c \
 				\
 				sector/get_z_in_sector.c \
 				\
@@ -55,7 +61,9 @@ SRC_NAME	=	main.c \
 				mlx_hooks/loop_hook.c \
 				\
 				quicksort/quicksort.c \
-				qs_walls_cmp.c
+				qs_walls_cmp.c \
+				\
+				set_ray.c
 
 SRC			+= $(addprefix $(SRC_DIR),$(SRC_NAME))
 

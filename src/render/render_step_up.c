@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/29 01:31:09 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/29 06:44:43 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/30 02:06:09 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ void			render_step_up(t_sector *from, t_sector *to,
 		return ;
 	y1 = w_inter->projected_y1;
 	y2 = y1 + z2 / w_inter->cos_distance * e->pplane->distance_to_pp;
-	if (e->render->current_top > y2)
+	if (e->g_render->current_top > y2)
 		return ;
-	if (e->render->current_top > y1)
-		y1 = e->render->current_top;
-	setup_x1_y1_x2(e->render->column, y1, e->render->column, e->mlx->mlx_i);
+	if (e->g_render->current_top > y1)
+		y1 = e->g_render->current_top;
+	setup_x1_y1_x2(e->g_render->column, y1, e->g_render->column, e->mlx->mlx_i);
 	setup_y2_color(y2, 0x9918ad00, e->mlx->mlx_i);
 	draw_line_to_img(e->screen, e->mlx->mlx_i);
-	e->render->current_top = y2;
+	e->g_render->current_top = y2;
 }

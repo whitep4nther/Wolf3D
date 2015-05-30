@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_ray.c                                          :+:      :+:    :+:   */
+/*   segment2_ray.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/29 07:04:58 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/29 07:05:40 by ihermell         ###   ########.fr       */
+/*   Created: 2015/05/30 02:45:42 by ihermell          #+#    #+#             */
+/*   Updated: 2015/05/30 02:46:49 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <wolf.h>
+#ifndef SEGMENT2_RAY_H
+# define SEGMENT2_RAY_H
 
-void		set_ray(double angle, t_segment2 *ray)
+# include <point2.h>
+# include <segment2.h>
+
+typedef struct			s_seg_ray
 {
-	ray->points[1].x = ray->points[0].x + cos(D2R(angle)) * PLAYER_SIGHT;
-	ray->points[1].y = ray->points[0].y + sin(D2R(angle)) * PLAYER_SIGHT;
-}
+	t_segment2			ray;
+	double				angle;
+	double				
+}						t_seg_ray;
+
+#endif

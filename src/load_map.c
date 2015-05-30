@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 03:44:04 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/29 07:35:08 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/30 02:58:39 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static t_list	*load_walls(t_list *file, t_map *map, int nb)
 	return (file);
 }
 
-static t_list	*load_sectors(t_list *file, t_map *map, int nb)
+static t_list	*load_sectors(t_list *file, t_map *map, int nb, t_wall *walls)
 {
 	int			i;
 	int			j;
@@ -114,10 +114,10 @@ static t_list	*load_sectors(t_list *file, t_map *map, int nb)
 		split = ft_strsplit(file->content, ' ');
 		tmp = ft_len_str_tab(split);
 		map->sectors[i].nb_walls = tmp;
-		map->sectors[i].walls = (int*)malloc(sizeof(int) * tmp);
+		map->sectors[i].walls = (t_wall**)malloc(sizeof(t_wall*) * tmp);
 		j = -1;
 		while (++j < tmp)
-			map->sectors[i].walls[j] = ft_atoi(split[j]);
+			map->sectors[i].walls[j] = walls + ft_atoi(split[j]);
 		file = free_and_advance(file);
 		ft_free_str_tab(split);
 	}
@@ -132,8 +132,8 @@ static void		parse_map(t_list *file, t_map *map)
 	file = free_and_advance(file);
 	map->sectors = (t_sector*)malloc(sizeof(t_sector) * map->nb_sectors);
 	map->walls = (t_wall*)malloc(sizeof(t_wall) * map->nb_walls);
-	file = load_sectors(file, map, map->nb_sectors);
 	file = load_walls(file, map, map->nb_walls);
+	file = load_sectors(file, map, map->nb_sectors, map->walls);
 	(void)map;
 }
 
