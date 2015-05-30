@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/29 01:31:09 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/30 02:06:09 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/30 07:35:00 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void			render_step_up(t_sector *from, t_sector *to,
 	if (z1 >= z2)
 		return ;
 	y1 = w_inter->projected_y1;
-	y2 = y1 + z2 / w_inter->cos_distance * e->pplane->distance_to_pp;
+	y2 = y1 + floor(z2 / w_inter->cos_distance * e->pplane->distance_to_pp);
 	if (e->g_render->current_top > y2)
 		return ;
 	if (e->g_render->current_top > y1)

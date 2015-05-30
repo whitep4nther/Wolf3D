@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/28 00:53:43 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/29 07:55:59 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/30 07:29:33 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,17 @@ static void		render_minimap_walls(t_env *e)
 	}
 }
 
-void			render_minimap_ray(t_segment2 *ray, t_env *e)
+void			render_minimap_seg(t_segment2 *seg, int color, t_env *e)
 {
 	t_player	*p;
 
 	p = e->game->player;
-	e->ints[0] = (ray->points[0].x - p->pos.x) * MMAP_RATIO + MMAP_WIDTH / 2;
-	e->ints[1] = (ray->points[0].y - p->pos.y) * MMAP_RATIO + MMAP_HEIGHT / 2;
-	e->ints[2] = (ray->points[1].x - p->pos.x) * MMAP_RATIO + MMAP_WIDTH / 2;
-	e->ints[3] = (ray->points[1].y - p->pos.y) * MMAP_RATIO + MMAP_HEIGHT / 2;
+	e->ints[0] = floor((seg->points[0].x - p->pos.x) * MMAP_RATIO + MMAP_WIDTH / 2);
+	e->ints[1] = floor((seg->points[0].y - p->pos.y) * MMAP_RATIO + MMAP_HEIGHT / 2);
+	e->ints[2] = floor((seg->points[1].x - p->pos.x) * MMAP_RATIO + MMAP_WIDTH / 2);
+	e->ints[3] = floor((seg->points[1].y - p->pos.y) * MMAP_RATIO + MMAP_HEIGHT / 2);
 	setup_x1_y1_x2(e->ints[0], e->ints[1], e->ints[2], e->mlx->mlx_i);
-	setup_y2_color(e->ints[3], MMAP_RAY_COLOR, e->mlx->mlx_i);
+	setup_y2_color(e->ints[3], color, e->mlx->mlx_i);
 	draw_line_to_img(e->minimap, e->mlx->mlx_i);
 }
 
@@ -66,6 +66,8 @@ void			render_minimap(t_env *e)
 {
 	render_minimap_player(e);
 	render_minimap_walls(e);
+	render_minimap_portal(e->game->lportal, e);
+	render_minimap_portal(e->game->rportal, e);
 	mlx_put_image_to_window(e->mlx->mlx, e->mlx->win, e->minimap->img,
 		50, 50);
 }

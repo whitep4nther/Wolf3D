@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse_hook.c                                       :+:      :+:    :+:   */
+/*   set_portal_angle.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/26 19:49:53 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/30 07:43:10 by ihermell         ###   ########.fr       */
+/*   Created: 2015/05/30 07:37:44 by ihermell          #+#    #+#             */
+/*   Updated: 2015/05/30 07:46:32 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <wolf.h>
 
-int				mouse_hook(int button, int x, int y, t_env *e)
+void		set_portal_angle(double angle, t_portal *portal)
 {
-	if (button == 1)
-		send_portal(e->game->lportal, e->game->player, e);
-	else if (button == 2)
-		send_portal(e->game->rportal, e->game->player, e);
-	(void)x;
-	(void)y;
-	(void)e;
-	return (0);
+	portal->angle = angle;
+	portal->cos = cos(D2R(angle));
+	portal->sin = sin(D2R(angle));
 }

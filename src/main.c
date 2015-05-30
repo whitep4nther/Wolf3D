@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 02:27:39 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/30 06:17:51 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/30 07:46:19 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int				main(int ac, char **av)
 	env->game->lportal->wall = &env->game->map->walls[2];
 	env->game->lportal->sector = env->game->map->sectors;
 	env->game->lportal->pos.x = 171.554160;
-	env->game->lportal->pos.y = 855.278600;
+	env->game->lportal->pos.y = 863.278600;
 	env->game->lportal->angle = 243.434949;
 	env->game->lportal->cos = cos(D2R(env->game->lportal->angle));
 	env->game->lportal->sin = sin(D2R(env->game->lportal->angle));

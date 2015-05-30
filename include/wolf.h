@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 01:25:04 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/30 06:56:06 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/30 07:43:48 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,12 @@
 # define MMAP_WIDTH		300
 # define MMAP_HEIGHT	200
 # define MMAP_OPACITY	0x99
-# define MMAP_RATIO		0.1
-# define MMAP_PLAYER_COLOR 0xef323200
-# define MMAP_WALL_COLOR 0xffffff00
+# define MMAP_RATIO		0.2
+# define MMAP_PLAYER_COLOR 0xEF323200
+# define MMAP_WALL_COLOR 0xFFFFFF00
 # define MMAP_RAY_COLOR	0xFF0000C8
+# define MMAP_CENTERING_X MMAP_RATIO + MMAP_WIDTH / 2
+# define MMAP_CENTERING_Y MMAP_RATIO + MMAP_HEIGHT / 2
 
 # define PLAYER_FOV		60
 # define PLAYER_HEIGHT	32
@@ -46,8 +48,8 @@
 # define PLAYER_WIDTH	3
 
 # define PORTAL_WIDTH	32
-# define LPORTAL_COLOR	0xFFBB0000
-# define RPORTAL_COLOR	0x0090FF00
+# define LPORTAL_COLOR	0xF7860E00
+# define RPORTAL_COLOR	0x006EFF00
 
 typedef struct			s_wall
 {
@@ -150,8 +152,8 @@ typedef struct			s_player
 	int					height;
 	int					fov;
 	t_sector			*current_sector;
-	t_w_intersection	walls[101];
-	t_sort				sort[101];
+	t_w_intersection	walls[24];
+	t_sort				sort[24];
 }						t_player;
 
 typedef struct			s_game
@@ -177,6 +179,8 @@ typedef struct			s_env
 	t_game				*game;
 	t_input				*input;
 	t_g_render			*g_render;
+	t_w_intersection	w_intersection[512];
+	t_sort				sort[512];
 	int					ints[10];
 }						t_env;
 
@@ -196,7 +200,8 @@ void					process(t_env *e);
 void					set_ray(double angle, int size, t_segment2 *ray);
 
 void					render_minimap(t_env *e);
-void					render_minimap_ray(t_segment2 *ray, t_env *e);
+void					render_minimap_seg(t_segment2 *seg, int color, t_env *e);
+void					render_minimap_portal(t_portal *portal, t_env *e);
 
 int						cast_to_sector_walls(t_segment2 *ray, t_sector *sector,
 						t_w_intersection *w, t_sort *s);
@@ -230,6 +235,8 @@ t_portal				*the_other_portal(t_portal *from, t_env *e);
 void					get_portal_new_pos(t_portal *from, t_point2 *inter,
 						t_portal *to, t_point2 *new_pos);
 int						get_portal_color(t_portal *portal, t_env *e);
+void					set_portal_angle(double angle, t_portal *portal);
+void					send_portal(t_portal *portal, t_player *p, t_env *e);
 
 void					update_player_sight(t_player *player);
 void					set_player_angle(double angle, t_player *player);

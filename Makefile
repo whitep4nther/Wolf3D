@@ -6,7 +6,7 @@
 #    By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/03 22:55:20 by ihermell          #+#    #+#              #
-#    Updated: 2015/05/30 06:36:57 by ihermell         ###   ########.fr        #
+#    Updated: 2015/05/30 07:44:04 by ihermell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,6 @@ SRC_NAME	=	main.c \
 				render/render.c \
 				render/render_step_up.c \
 				render/render_floor.c \
-				render/render_minimap.c \
 				render/render_wall.c \
 				render/process_walls_intersections.c \
 				render/render_sector.c \
@@ -55,6 +54,11 @@ SRC_NAME	=	main.c \
 				portals/the_other_portal.c \
 				portals/get_portal_new_pos.c \
 				portals/get_portal_color.c \
+				portals/send_portal.c \
+				portals/set_portal_angle.c \
+				\
+				minimap/render_minimap.c \
+				minimap/render_minimap_portal.c \
 				\
 				sector/get_z_in_sector.c \
 				\
