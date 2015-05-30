@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 02:31:34 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/30 02:36:33 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/30 06:30:44 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static t_game	*init_game(void)
 	game->player = (t_player*)malloc(sizeof(t_player));
 	fill_point2(207, 596.7, &game->player->pos);
 	game->player->angle = 330;
+	game->player->angle_cos = cos(D2R(330));
+	game->player->angle_sin = sin(D2R(330));
 	game->player->fov = PLAYER_FOV;
 	game->player->height = PLAYER_HEIGHT;
 	game->player->speed = PLAYER_BASE_SPEED;

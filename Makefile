@@ -6,7 +6,7 @@
 #    By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/03 22:55:20 by ihermell          #+#    #+#              #
-#    Updated: 2015/05/30 03:21:19 by ihermell         ###   ########.fr        #
+#    Updated: 2015/05/30 06:36:57 by ihermell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRC_NAME	=	main.c \
 				player/turn_right.c \
 				player/move_forward.c \
 				player/move_backward.c \
+				player/process_player_movement.c \
 				\
 				cast/cast_to_sector_walls.c \
 				\
@@ -41,14 +42,19 @@ SRC_NAME	=	main.c \
 				render/render_wall.c \
 				render/process_walls_intersections.c \
 				render/render_sector.c \
+				render/render_portal.c \
 				render/render_through_portal.c \
+				render/render_portal_overlay.c \
+				render/render_portal_border.c \
 				\
 				render_struct/init_render_struct.c \
 				render_struct/set_render_struct_ray_angle.c \
 				\
-				portals/point_in_portal.c \
+				portals/w_inter_in_portals.c \
+				portals/is_portal_visible.c \
 				portals/the_other_portal.c \
 				portals/get_portal_new_pos.c \
+				portals/get_portal_color.c \
 				\
 				sector/get_z_in_sector.c \
 				\

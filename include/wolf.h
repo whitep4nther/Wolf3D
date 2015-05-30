@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 01:25:04 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/30 03:27:42 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/30 06:56:06 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@
 # define PLAYER_HEIGHT	32
 # define PLAYER_SIGHT	1000
 # define PLAYER_BASE_SPEED 5
+# define PLAYER_WIDTH	3
 
-# define PORTAL_WIDTH	64
-
-# define DO_CALCULATION	1
-# define NO_CALCULATION	0
+# define PORTAL_WIDTH	32
+# define LPORTAL_COLOR	0xFFBB0000
+# define RPORTAL_COLOR	0x0090FF00
 
 typedef struct			s_wall
 {
@@ -125,6 +125,8 @@ typedef struct			s_render
 {
 	t_segment2			ray;
 	double				ray_angle;
+	double				ray_cos;
+	double				ray_sin;
 	double				reference_angle;
 	double				cos_ray_ref;
 	double				base_distance;
@@ -142,6 +144,8 @@ typedef struct			s_player
 	t_point2			pos;
 	t_segment2			sight;
 	double				angle;
+	double				angle_cos;
+	double				angle_sin;
 	int					speed;
 	int					height;
 	int					fov;
@@ -183,13 +187,13 @@ t_env					*init_env(void);
 void					init_render_struct(double ray_angle, double ref_angle,
 						t_point2 *ref_pos, t_render *r);
 void					set_render_struct_ray_angle(double ray_angle,
-						t_render *r);
+						int ray_size, t_render *r);
 
 t_map					*load_map(char *map);
 
 void					process(t_env *e);
 
-void					set_ray(double angle, t_segment2 *ray);
+void					set_ray(double angle, int size, t_segment2 *ray);
 
 void					render_minimap(t_env *e);
 void					render_minimap_ray(t_segment2 *ray, t_env *e);
@@ -207,15 +211,25 @@ t_sector				*next_sector(t_wall *wall, t_sector *c_sector,
 void					render_step_up(t_sector *from, t_sector *to,
 						t_w_intersection *w_inter, t_env *e);
 void					render_floor(int from, t_sector *sector, t_env *e);
+void					render_portal(t_portal *portal, t_w_intersection *w_inter,
+						t_render *r, t_env *e);
 void					render_through_portal(t_portal *from, t_portal *to,
 						t_render *r, t_env *e);
+void					render_portal_overlay(t_portal *portal,
+						t_w_intersection *w_inter, t_env *e);
+void					render_portal_border(t_portal *portal,
+						t_w_intersection *w_inter, t_render *r, t_env *e);
 
 double					get_z_in_sector(t_sector *sector, double x, double y);
 
-int						point_in_portal(t_portal *portal, t_point2 *p);
+t_portal				*w_inter_in_portals(t_w_intersection *w_inter,
+						t_env *e);
+int						is_portal_visible(double angle,
+						t_portal *portal);
 t_portal				*the_other_portal(t_portal *from, t_env *e);
 void					get_portal_new_pos(t_portal *from, t_point2 *inter,
 						t_portal *to, t_point2 *new_pos);
+int						get_portal_color(t_portal *portal, t_env *e);
 
 void					update_player_sight(t_player *player);
 void					set_player_angle(double angle, t_player *player);
@@ -223,6 +237,9 @@ void					turn_left(double angle, t_player *player);
 void					turn_right(double angle, t_player *player);
 void					move_forward(t_env *e);
 void					move_backward(t_env *e);
+
+void					process_player_movement(double angle, int speed, t_player *p,
+						t_env *e);
 
 int						keypress_hook(int keycode, t_env *e);
 int						keyrelease_hook(int keycode, t_env *e);

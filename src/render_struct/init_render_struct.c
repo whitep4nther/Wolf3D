@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/29 23:27:20 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/30 02:43:05 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/30 06:56:13 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@ void			init_render_struct(double ray_angle, double reference_angle,
 	render->tmp_wall = NULL;
 	render->tmp_sector = NULL;
 	render->ray.points[0] = *reference_pos;
-	set_render_struct_ray_angle(ray_angle, render);
+	set_render_struct_ray_angle(ray_angle, PLAYER_SIGHT, render);
 }

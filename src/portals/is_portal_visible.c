@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   point_in_portal.c                                  :+:      :+:    :+:   */
+/*   is_portal_visible.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/30 00:11:12 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/30 00:13:59 by ihermell         ###   ########.fr       */
+/*   Created: 2015/05/30 05:38:13 by ihermell          #+#    #+#             */
+/*   Updated: 2015/05/30 06:04:22 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <wolf.h>
 
-int				point_in_portal(t_portal *portal, t_point2 *p)
+int			is_portal_visible(double angle, t_portal *portal)
 {
-	if (fabs(portal->pos.x - p->x) > PORTAL_WIDTH / 2
-		|| fabs(portal->pos.y - p->y) > PORTAL_WIDTH / 2)
-		return (0);
-	return (1);
+	if (true_angle(angle - 180) > portal->angle - 90
+		&& true_angle(angle - 180) < portal->angle + 90)
+		return (1);
+	return (0);
 }

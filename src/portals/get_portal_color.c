@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_ray.c                                          :+:      :+:    :+:   */
+/*   get_portal_color.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/29 07:04:58 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/30 04:30:14 by ihermell         ###   ########.fr       */
+/*   Created: 2015/05/30 06:24:14 by ihermell          #+#    #+#             */
+/*   Updated: 2015/05/30 06:24:54 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <wolf.h>
 
-void		set_ray(double angle, int size, t_segment2 *ray)
+int				get_portal_color(t_portal *portal, t_env *e)
 {
-	ray->points[1].x = ray->points[0].x + cos(D2R(angle)) * size;
-	ray->points[1].y = ray->points[0].y + sin(D2R(angle)) * size;
+	if (portal == e->game->lportal)
+		return (LPORTAL_COLOR);
+	return (RPORTAL_COLOR);
 }

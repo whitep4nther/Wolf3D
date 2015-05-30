@@ -6,24 +6,11 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 18:57:07 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/30 03:23:57 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/30 07:07:59 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <wolf.h>
-
-static t_portal		*check_portals(t_render *r, t_env *e)
-{
-	if (e->game->lportal->wall
-		&& r->tmp_wall->id == e->game->lportal->wall->id
-		&& point_in_portal(e->game->lportal, &r->tmp_inter->intersection))
-		return (e->game->lportal);
-	if (e->game->rportal->wall
-		&& r->tmp_wall->id == e->game->rportal->wall->id
-		&& point_in_portal(e->game->rportal, &r->tmp_inter->intersection))
-		return (e->game->rportal);
-	return (NULL);
-}
 
 void			render_sector(t_sector *sector, t_render *r, t_env *e)
 {
@@ -46,8 +33,9 @@ void			render_sector(t_sector *sector, t_render *r, t_env *e)
 		r->tmp_wall->column_rendered = e->g_render->column;
 		r->tmp_wall->depth_rendered = r->depth;
 		render_floor(r->tmp_inter->projected_y1, sector, e);
-		if ((portal = check_portals(r, e)))
-			render_through_portal(portal, the_other_portal(portal, e), r, e);
+		if ((portal = w_inter_in_portals(r->tmp_inter, e))
+			&& is_portal_visible(r->ray_angle, portal))
+			render_portal(portal, r->tmp_inter, r, e);
 		else if (r->tmp_wall->is_portal == 0)
 			render_wall(r->tmp_inter, e);
 		else

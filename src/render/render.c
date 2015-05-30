@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/25 22:41:52 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/30 02:25:38 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/30 06:21:18 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void			render(t_env *e)
 			render_floor(e->pplane->center_y, e->game->map->sectors, e);
 		render_minimap_ray(&r.ray, e);
 		set_render_struct_ray_angle(true_angle(r.ray_angle - e->pplane->angle_btw_rays),
-			&r);
+			PLAYER_SIGHT, &r);
 	}
 	mlx_put_image_to_window(e->mlx->mlx, e->mlx->win, e->screen->img, 0, 0);
 	render_minimap(e);
