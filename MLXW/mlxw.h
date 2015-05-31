@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/25 23:15:10 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/31 10:21:54 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/31 15:31:28 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ t_mlx_img					*mlx_new_image_struct(void *mlx, int width, int height);
 
 void						mlx_put_pixel_to_img(int x, int y, int color, t_mlx_img *img);
 void						mlx_clear_image(int color, t_mlx_img *img);
+void						mlx_clear_half_image(int color, t_mlx_img *img);
+int							mlx_get_blended_color(unsigned char *color1,
+							unsigned char *color2);
 
 void						setup_x1_y1_x2(int x1, int y1, int x2, int mlx_i[10]);
 void						setup_y2_color(int y2, int color, int mlx_i[10]);

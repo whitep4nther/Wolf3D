@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/25 22:41:52 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/31 12:42:33 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/31 14:55:04 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,19 @@ void			render_slice(int y1, int y2, int color, t_env *e)
 	e->g_render->current_top = y2;
 }
 
-static void		render_sky(t_env *e)
+/*static void		render_sky(t_env *e)
 {
 	setup_x1_y1_x2(e->g_render->column, e->g_render->current_top, e->g_render->column,
 		e->mlx->mlx_i);
 	setup_y2_color(e->screen->height, 0x00F2F2EF, e->mlx->mlx_i);
 	draw_line_to_img(e->screen, e->mlx->mlx_i);
-}
+}*/
 
 void			render(t_env *e)
 {
 	t_render	r;
 
-	//mlx_clear_image(0xf2f2ef00, e->screen);
+	mlx_clear_image(0x00F2F2EF, e->screen);
 	mlx_clear_image(MMAP_BCKGD + MMAP_OPACITY, e->minimap);
 	e->g_render->column = -1;
 	init_render_struct(true_angle(e->game->player->angle + PLAYER_FOV / 2),
@@ -50,14 +50,15 @@ void			render(t_env *e)
 	{
 		e->g_render->current_top = 0;
 		render_sector(e->game->map->sectors, &r, e);
-		if (e->g_render->current_top < e->pplane->center_y)
-			render_floor(e->pplane->center_y, e->game->map->sectors, e);
-		if (e->g_render->current_top < e->screen->height - 1)
-			render_sky(e);
+		if (e->g_render->current_top < e->pplane->center_y + e->game->player->z_shift)
+			render_floor(e->pplane->center_y + e->game->player->z_shift, e->game->map->sectors, e);
+		/*if (e->g_render->current_top < e->screen->height - 1)
+			render_sky(e);*/
 		render_minimap_seg(&r.ray, MMAP_RAY_COLOR + MMAP_OPACITY, e);
 		set_render_struct_ray_angle(true_angle(r.ray_angle - e->pplane->angle_btw_rays),
 			PLAYER_SIGHT, &r);
 	}
+	render_cursor(e);
 	mlx_put_image_to_window(e->mlx->mlx, e->mlx->win, e->screen->img, 0, 0);
 	render_minimap(e);
 	//draw_all_walls(e);

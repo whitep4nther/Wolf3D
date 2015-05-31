@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 02:31:34 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/31 08:25:02 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/31 13:47:32 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static t_game	*init_game(void)
 	game->map = NULL;
 	game->player = (t_player*)malloc(sizeof(t_player));
 	fill_point2(207, 596.7, &game->player->pos);
+	game->player->z_shift = 0;
 	game->player->angle = 330;
 	game->player->angle_cos = cos(D2R(330));
 	game->player->angle_sin = sin(D2R(330));

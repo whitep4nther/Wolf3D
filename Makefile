@@ -6,7 +6,7 @@
 #    By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/03 22:55:20 by ihermell          #+#    #+#              #
-#    Updated: 2015/05/31 12:22:30 by ihermell         ###   ########.fr        #
+#    Updated: 2015/05/31 12:57:22 by ihermell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ SRC_NAME	=	main.c \
 				minimap/render_minimap.c \
 				minimap/render_minimap_portal.c \
 				\
+				overlay/render_cursor.c \
 				sector/get_z_in_sector.c \
 				\
 				walls/next_sector.c \

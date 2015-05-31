@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 01:25:04 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/31 12:31:14 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/31 15:31:11 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ typedef struct			s_player
 {
 	t_point2			pos;
 	t_segment2			sight;
+	int					z_shift;
 	double				angle;
 	double				angle_cos;
 	double				angle_sin;
@@ -230,6 +231,7 @@ void					render_portal_overlay(t_portal *portal,
 						t_w_intersection *w_inter, t_env *e);
 void					render_portal_border(t_portal *portal,
 						t_w_intersection *w_inter, t_render *r, t_env *e);
+void					render_cursor(t_env *e);
 
 double					get_z_in_sector(t_sector *sector, double x, double y);
 

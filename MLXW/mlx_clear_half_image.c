@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse_move_hook.c                                  :+:      :+:    :+:   */
+/*   mlx_clear_half_image.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/31 08:21:01 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/31 13:51:44 by ihermell         ###   ########.fr       */
+/*   Created: 2015/05/31 14:51:34 by ihermell          #+#    #+#             */
+/*   Updated: 2015/05/31 14:52:24 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <wolf.h>
+#include <mlxw.h>
 
-int			mouse_move_hook(double delta_x, double delta_y, t_env *e)
+void			mlx_clear_half_image(int color, t_mlx_img *img)
 {
-	int		y;
+	int			i;
+	int			j;	
 
-	set_player_angle(true_angle(e->game->player->angle - delta_x / 15),
-		e->game->player);
-	y = e->game->player->z_shift += delta_y;
-	if (y < -e->pplane->center_y)
-		y = -e->pplane->center_y;
-	else if (y > e->pplane->center_y)
-		y = e->pplane->center_y;
-	e->game->player->z_shift = y;
-	(void)delta_y;
-	return (0);
+	i = -1;
+	while (++i < img->width)
+	{
+		j = img->height - 1;
+		while (--j > img->height / 2)
+			mlx_put_pixel_to_img(i, j, color, img);
+	}
 }

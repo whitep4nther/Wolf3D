@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/31 11:25:00 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/31 11:38:12 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/31 15:22:59 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@
 # define LPORTAL_COLOR		0x000E86F7
 # define RPORTAL_COLOR		0x00FF6E00
 
+# define CURSOR_COLOR		LPORTAL_COLOR
 
 #endif
