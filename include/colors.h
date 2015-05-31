@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process.c                                          :+:      :+:    :+:   */
+/*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/26 22:24:27 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/31 10:14:21 by ihermell         ###   ########.fr       */
+/*   Created: 2015/05/31 11:25:00 by ihermell          #+#    #+#             */
+/*   Updated: 2015/05/31 11:38:12 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <wolf.h>
+#ifndef COLORS_H
+# define COLORS_H
 
-void			process(t_env *e)
-{
-	if (e->input->a == 1)
-		move_left(e);
-	else if (e->input->d == 1)
-		move_right(e);
-	if (e->input->w == 1)
-		move_forward(e);
-	else if (e->input->s == 1)
-		move_backward(e);
-}
+// ALL COLORS ARE 0x00BBGGRR
+
+# define MMAP_BCKGD			0x00333333
+# define MMAP_OPACITY		0x99000000
+# define MMAP_PLAYER_COLOR	0x003232EF
+# define MMAP_WALL_COLOR	0x00FFFFFF
+# define MMAP_RAY_COLOR		0x00C9D3D3
+
+# define LPORTAL_COLOR		0x000E86F7
+# define RPORTAL_COLOR		0x00FF6E00
+
+
+#endif

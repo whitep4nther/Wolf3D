@@ -6,7 +6,7 @@
 #    By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/03 22:55:20 by ihermell          #+#    #+#              #
-#    Updated: 2015/05/30 07:44:04 by ihermell         ###   ########.fr        #
+#    Updated: 2015/05/31 12:22:30 by ihermell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 NAME		= wolf3d
 
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -Ofast
+CFLAGS		= -Wall -Wextra -Werror -O3
 
 EXT_SRC		= GNL/get_next_line.c
 
@@ -31,6 +31,8 @@ SRC_NAME	=	main.c \
 				player/turn_right.c \
 				player/move_forward.c \
 				player/move_backward.c \
+				player/move_left.c \
+				player/move_right.c \
 				player/process_player_movement.c \
 				\
 				cast/cast_to_sector_walls.c \
@@ -67,6 +69,7 @@ SRC_NAME	=	main.c \
 				mlx_hooks/keypress_hook.c \
 				mlx_hooks/keyrelease_hook.c \
 				mlx_hooks/mouse_hook.c \
+				mlx_hooks/mouse_move_hook.c \
 				mlx_hooks/expose_hook.c \
 				mlx_hooks/loop_hook.c \
 				\

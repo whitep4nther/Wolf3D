@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 01:25:04 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/31 05:41:08 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/31 12:31:14 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 //
 # include <stdio.h>
+# include <time.h>
 
 # include <fcntl.h>
 # include <math.h>
@@ -27,29 +28,27 @@
 
 # include <quicksort.h>
 
-# define WIN_WIDTH		1400
-# define WIN_HEIGHT		1000
+# include <colors.h>
 
-# define MMAP_BCKGD		0x33333300
+# define WIN_WIDTH		1200
+# define WIN_HEIGHT		800
+
+# define MMAP_BCKGD		0x00333333
 # define MMAP_WIDTH		300
 # define MMAP_HEIGHT	200
-# define MMAP_OPACITY	0x99
 # define MMAP_RATIO		0.2
-# define MMAP_PLAYER_COLOR 0xEF323200
-# define MMAP_WALL_COLOR 0xFFFFFF00
-# define MMAP_RAY_COLOR	0xD3D3C900
 # define MMAP_CENTERING_X MMAP_RATIO + MMAP_WIDTH / 2
 # define MMAP_CENTERING_Y MMAP_RATIO + MMAP_HEIGHT / 2
 
 # define PLAYER_FOV		60
 # define PLAYER_HEIGHT	32
 # define PLAYER_SIGHT	1000
-# define PLAYER_BASE_SPEED 5
+# define PLAYER_BASE_SPEED 3.2
+# define PLAYER_SIDE_RATIO 0.8
 # define PLAYER_WIDTH	3
 
 # define PORTAL_WIDTH	32
-# define LPORTAL_COLOR	0xF7860E00
-# define RPORTAL_COLOR	0x006EFF00
+# define MAX_PORTAL_DEPTH 10
 
 typedef struct			s_wall
 {
@@ -81,8 +80,12 @@ typedef struct			s_portal
 	t_sector			*sector;
 	t_point2			pos;
 	double				angle;
-	double				cos;
-	double				sin;
+	double				angle_cos;
+	double				angle_sin;
+	double				direction_cos;
+	double				direction_sin;
+	double				half_wcos_computed;
+	double				half_wsin_computed;
 }						t_portal;
 
 typedef struct			s_map
@@ -95,10 +98,10 @@ typedef struct			s_map
 
 typedef struct			s_input
 {
-	char				left;
-	char				right;
-	char				up;
-	char				down;
+	char				w;
+	char				a;
+	char				s;
+	char				d;
 }						t_input;
 
 typedef struct			s_pplane
@@ -148,7 +151,7 @@ typedef struct			s_player
 	double				angle;
 	double				angle_cos;
 	double				angle_sin;
-	int					speed;
+	double				speed;
 	int					height;
 	int					fov;
 	t_sector			*current_sector;
@@ -208,6 +211,9 @@ int						cast_to_sector_walls(t_segment2 *ray, t_sector *sector,
 void					process_walls_intersections(int nb_walls, t_sector *sector,
 						t_render *r, t_env *e);
 
+//loul
+void					render_slice(int y1, int y2, int color, t_env *e);
+// loul
 void					render(t_env *e);
 void					render_wall(t_w_intersection *intersection, t_env *e);
 void					render_sector(t_sector *sector, t_render *r, t_env *env);
@@ -243,6 +249,8 @@ void					turn_left(double angle, t_player *player);
 void					turn_right(double angle, t_player *player);
 void					move_forward(t_env *e);
 void					move_backward(t_env *e);
+void					move_left(t_env *e);
+void					move_right(t_env *e);
 
 void					process_player_movement(double angle, int speed, t_player *p,
 						t_env *e);
@@ -250,6 +258,7 @@ void					process_player_movement(double angle, int speed, t_player *p,
 int						keypress_hook(int keycode, t_env *e);
 int						keyrelease_hook(int keycode, t_env *e);
 int						mouse_hook(int button, int x, int y, t_env *e);
+int						mouse_move_hook(double delta_x, double delta_y, t_env *e);
 int						expose_hook(t_env *e);
 int						loop_hook(t_env *e);
 

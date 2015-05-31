@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/25 23:15:10 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/28 01:44:57 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/31 10:21:54 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include <stdlib.h>
 
 # define KEY_ESCAPE			53
+# define KEY_W				13
+# define KEY_A				0
+# define KEY_S				1
+# define KEY_D				2
 # define KEY_LEFT			123
 # define KEY_RIGHT			124
 # define KEY_DOWN			125

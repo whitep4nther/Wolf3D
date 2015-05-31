@@ -51,13 +51,20 @@ int get_mouse_button(NSEventType eventtype)
 
 
 
-
 @implementation NSWindowEvent
 
 - (NSWindowEvent *) initWithContentRect:(NSRect)rect styleMask:(NSUInteger)winstyle backing:(NSBackingStoreType)bck defer:(BOOL) dfr
 {
   int i;
-
+  NSRect e = [[NSScreen mainScreen] frame];
+  [NSCursor hide];
+  double h = e.size.height;
+  double w = e.size.width;
+  rect.origin.x = (w - rect.size.width) / 2;
+  rect.origin.y = (h - rect.size.height) / 2;
+  NSPoint center = CGPointMake(w / 2, h / 2);
+  CGWarpMouseCursorPosition(center);
+CGAssociateMouseAndMouseCursorPosition(false);
   if ((self = [super initWithContentRect:rect
 		     styleMask:winstyle
 		     backing:bck
@@ -233,7 +240,8 @@ int get_mouse_button(NSEventType eventtype)
   thepoint = [theEvent locationInWindow];
   //  printf("Mouse moved  pos: %f, %f\n", thepoint.x, thepoint.y);
   if (event_funct[6] != NULL)
-    event_funct[6]((int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[6]);
+    event_funct[6]([theEvent deltaX], [theEvent deltaY], event_param[6]);
+    //event_funct[6]((int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[6]);
 }
 
 
@@ -244,7 +252,8 @@ int get_mouse_button(NSEventType eventtype)
   thepoint = [theEvent locationInWindow];
   //  printf("Mouse moved  pos: %f, %f\n", thepoint.x, thepoint.y);
   if (event_funct[6] != NULL)
-    event_funct[6]((int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[6]);
+    event_funct[6]([theEvent deltaX], [theEvent deltaY], event_param[6]);
+    //event_funct[6]((int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[6]);
 }
 
 
@@ -255,7 +264,8 @@ int get_mouse_button(NSEventType eventtype)
   thepoint = [theEvent locationInWindow];
   //  printf("Mouse moved  pos: %f, %f\n", thepoint.x, thepoint.y);
   if (event_funct[6] != NULL)
-    event_funct[6]((int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[6]);
+    event_funct[6]([theEvent deltaX], [theEvent deltaY], event_param[6]);
+    //event_funct[6]((int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[6]);
 }
 
 
@@ -266,7 +276,8 @@ int get_mouse_button(NSEventType eventtype)
   thepoint = [theEvent locationInWindow];
   //  printf("Mouse moved  pos: %f, %f\n", thepoint.x, thepoint.y);
   if (event_funct[6] != NULL)
-    event_funct[6]((int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[6]);
+    event_funct[6]([theEvent deltaX], [theEvent deltaY], event_param[6]);
+    //event_funct[6]((int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[6]);
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 02:27:39 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/30 07:46:19 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/31 07:33:05 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,12 @@ int				main(int ac, char **av)
 	env->game->lportal->sector = env->game->map->sectors;
 	env->game->lportal->pos.x = 171.554160;
 	env->game->lportal->pos.y = 863.278600;
-	env->game->lportal->angle = 243.434949;
-	env->game->lportal->cos = cos(D2R(env->game->lportal->angle));
-	env->game->lportal->sin = sin(D2R(env->game->lportal->angle));
+	set_portal_angle(243.434949, env->game->lportal);
 	env->game->rportal->wall = &env->game->map->walls[1];
 	env->game->rportal->sector = env->game->map->sectors;
 	env->game->rportal->pos.x = 400;
 	env->game->rportal->pos.y = 550;
-	env->game->rportal->angle = 180;
-	env->game->rportal->cos = cos(D2R(env->game->rportal->angle));
-	env->game->rportal->sin = sin(D2R(env->game->rportal->angle));
+	set_portal_angle(180, env->game->rportal);
 	env->game->player->current_sector = env->game->map->sectors;
 	/*mlx = mlx_init();
 	win = mlx_new_window(mlx, 400, 400, "lol");

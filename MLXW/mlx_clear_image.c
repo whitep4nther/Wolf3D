@@ -6,12 +6,12 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/27 20:24:07 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/28 00:36:53 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/31 11:18:15 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlxw.h>
-#include <stdio.h>
+
 void			mlx_clear_image(int color, t_mlx_img *img)
 {
 	int			i;

@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   segment2_ray.h                                     :+:      :+:    :+:   */
+/*   move_left.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/30 02:45:42 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/30 02:46:49 by ihermell         ###   ########.fr       */
+/*   Created: 2015/05/31 10:00:40 by ihermell          #+#    #+#             */
+/*   Updated: 2015/05/31 10:16:52 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SEGMENT2_RAY_H
-# define SEGMENT2_RAY_H
+#include <wolf.h>
 
-# include <point2.h>
-# include <segment2.h>
-
-typedef struct			s_seg_ray
+void			move_left(t_env *e)
 {
-	t_segment2			ray;
-	double				angle;
-	double				
-}						t_seg_ray;
+	t_player	*player;
 
-#endif
+	player = e->game->player;
+	process_player_movement(true_angle(player->angle + 90), player->speed *
+		PLAYER_SIDE_RATIO, player, e);
+}

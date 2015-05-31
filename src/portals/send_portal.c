@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/30 07:09:14 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/30 07:47:27 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/31 07:42:45 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void			send_portal(t_portal *portal, t_player *p,  t_env *e)
 		portal->sector = p->current_sector;
 		portal->pos = w_inter->intersection;
 		portal->angle = true_angle(portal->wall->angle - 90);
-		if (fabs(portal->angle - p->angle) < 90)
+		if (angles_within_gap(portal->angle, p->angle, 90))
 			portal->angle = true_angle(portal->angle - 180);
 		set_portal_angle(portal->angle, portal);
 	}

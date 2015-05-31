@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 02:31:34 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/30 06:30:44 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/31 08:25:02 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void		init_mlx(t_env *e)
 	mlx_hook(e->mlx->win, KeyPress, KeyPressMask, keypress_hook, e);
 	mlx_hook(e->mlx->win, KeyRelease, KeyReleaseMask, keyrelease_hook, e);
 	mlx_mouse_hook(e->mlx->win, mouse_hook, e);
+	mlx_hook(e->mlx->win, MotionNotify, PointerMotionMask, mouse_move_hook, e);
 	mlx_loop_hook(e->mlx->mlx, loop_hook, e);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/26 19:37:48 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/30 07:06:53 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/31 11:53:54 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void			vertical_line(t_mlx_img *img, int mlx_i[10])
 		DL_Y = DL_Y1;
 		DL_Y1 = tmp;
 	}
-	while (DL_Y < DL_Y1)
+	while (DL_Y <= DL_Y1)
 	{
 		mlx_put_pixel_to_img(DL_X, DL_Y, LINE_COLOR, img);
 		DL_Y++;

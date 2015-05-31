@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/30 03:19:42 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/30 07:34:18 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/31 12:31:23 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ void			process_walls_intersections(int nb_walls, t_sector *sector,
 		w_inter->distance += r->base_distance;
 		w_inter->cos_distance = w_inter->distance * r->cos_ray_ref;
 		coef = e->pplane->distance_to_pp / w_inter->cos_distance;
-		w_inter->projected_height = floor(w_inter->wall->height * coef);
 		w_inter->projected_y1 = floor(e->pplane->center_y - (PLAYER_HEIGHT -
 			get_z_in_sector(sector, w_inter->intersection.x, w_inter->intersection.y)) * coef);
+		if (w_inter->wall->is_portal == 1)
+			continue ;
+		w_inter->projected_height = floor(w_inter->wall->height * coef);
 		w_inter->projected_y2 = w_inter->projected_y1 + w_inter->projected_height;
 	}
 }
