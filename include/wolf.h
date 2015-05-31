@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 01:25:04 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/30 07:43:48 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/31 05:41:08 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define MMAP_RATIO		0.2
 # define MMAP_PLAYER_COLOR 0xEF323200
 # define MMAP_WALL_COLOR 0xFFFFFF00
-# define MMAP_RAY_COLOR	0xFF0000C8
+# define MMAP_RAY_COLOR	0xD3D3C900
 # define MMAP_CENTERING_X MMAP_RATIO + MMAP_WIDTH / 2
 # define MMAP_CENTERING_Y MMAP_RATIO + MMAP_HEIGHT / 2
 
@@ -229,8 +229,7 @@ double					get_z_in_sector(t_sector *sector, double x, double y);
 
 t_portal				*w_inter_in_portals(t_w_intersection *w_inter,
 						t_env *e);
-int						is_portal_visible(double angle,
-						t_portal *portal);
+int						is_portal_visible(double angle, t_portal *portal);
 t_portal				*the_other_portal(t_portal *from, t_env *e);
 void					get_portal_new_pos(t_portal *from, t_point2 *inter,
 						t_portal *to, t_point2 *new_pos);

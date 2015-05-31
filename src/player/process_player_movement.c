@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/30 04:06:43 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/30 06:06:46 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/31 05:42:44 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,17 @@ void					process_player_movement(double angle, int speed,
 	t_portal			*from;
 	t_portal			*to;
 	t_w_intersection	*w_inter;
+	double				cosa;
+	double				sina;
 
+	cosa = cos(D2R(angle));
+	sina = sin(D2R(angle));
 	move_x.points[0] = p->pos;
-	move_x.points[1].x = p->pos.x + speed * cos(D2R(angle));
+	move_x.points[1].x = p->pos.x + speed * cosa;
 	move_x.points[1].y = p->pos.y;
 	move_y.points[0] = p->pos;
 	move_y.points[1].x = p->pos.x;
-	move_y.points[1].y = p->pos.y + speed * sin(D2R(angle));
+	move_y.points[1].y = p->pos.y + speed * sina;
 	walls = cast_to_sector_walls(&move_x, p->current_sector, p->walls, p->sort);
 	if (walls > 0)
 	{
@@ -42,7 +46,7 @@ void					process_player_movement(double angle, int speed,
 			return ;
 		}
 		p->pos.x = ((t_w_intersection*)p->sort[0].content)->intersection.x +
-			2 * -cos(D2R(angle));
+			2 * -cosa;
 	}
 	else
 		p->pos.x = move_x.points[1].x;
@@ -60,7 +64,7 @@ void					process_player_movement(double angle, int speed,
 			return ;
 		}
 		p->pos.y = ((t_w_intersection*)p->sort[0].content)->intersection.y +
-			2 * -sin(D2R(angle));
+			2 * -sina;
 	}
 	else
 		p->pos.y = move_y.points[1].y;

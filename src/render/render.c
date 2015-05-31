@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/25 22:41:52 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/30 07:24:31 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/31 02:48:40 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void			render(t_env *e)
 		render_sector(e->game->map->sectors, &r, e);
 		if (e->g_render->current_top < e->pplane->center_y)
 			render_floor(e->pplane->center_y, e->game->map->sectors, e);
-		render_minimap_seg(&r.ray, MMAP_RAY_COLOR, e);
+		render_minimap_seg(&r.ray, MMAP_RAY_COLOR + MMAP_OPACITY, e);
 		set_render_struct_ray_angle(true_angle(r.ray_angle - e->pplane->angle_btw_rays),
 			PLAYER_SIGHT, &r);
 	}

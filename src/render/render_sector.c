@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 18:57:07 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/30 07:23:34 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/31 05:37:43 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void			render_sector(t_sector *sector, t_render *r, t_env *e)
 		r->tmp_wall->depth_rendered = r->depth;
 		render_floor(r->tmp_inter->projected_y1, sector, e);
 		if ((portal = w_inter_in_portals(r->tmp_inter, e))
-			&& is_portal_visible(r->ray_angle, portal))
+			&& is_portal_visible(r->ray_angle, portal)
+			&& e->g_render->current_top < r->tmp_inter->projected_y2)
 			render_portal(portal, r->tmp_inter, r, e);
 		else if (r->tmp_wall->is_portal == 0)
 			render_wall(r->tmp_inter, e);
