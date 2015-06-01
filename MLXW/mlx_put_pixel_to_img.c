@@ -6,12 +6,12 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/27 19:57:31 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/31 16:18:18 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/06/01 06:00:32 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlxw.h>
-#include <stdio.h>
+
 void			mlx_put_pixel_to_img(int x, int y, int color,
 				t_mlx_img *img)
 {

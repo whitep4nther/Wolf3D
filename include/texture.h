@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_render_struct_ray_angle.c                      :+:      :+:    :+:   */
+/*   texture.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/29 23:40:14 by ihermell          #+#    #+#             */
-/*   Updated: 2015/06/01 04:20:40 by ihermell         ###   ########.fr       */
+/*   Created: 2015/06/01 06:23:50 by ihermell          #+#    #+#             */
+/*   Updated: 2015/06/01 06:29:29 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <wolf.h>
+#ifndef TEXTURE_H
+# define TEXTURE_H
 
-void			set_render_struct_ray_angle(double ray_angle, int ray_size,
-				t_render *render)
+# include <bmp.h>
+
+typedef struct			s_texture
 {
-	render->ray_angle = ray_angle;
-	render->ray_cos = cos(D2R(ray_angle));
-	render->ray_sin = sin(D2R(ray_angle));
-	render->cos_ray_ref = cos(D2R(true_angle(ray_angle - render->reference_angle)));
-	set_ray(ray_angle, ray_size, &render->ray);
-}
+	t_bitmapinfoheader	file_info;
+	unsigned char		*data;
+	int					width;
+	int					height;
+}						t_texture;
+
+void					load_texture(char *filename, t_texture *texture);
+
+#endif

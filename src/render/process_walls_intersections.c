@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/30 03:19:42 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/31 15:37:44 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/06/01 06:09:10 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void			process_walls_intersections(int nb_walls, t_sector *sector,
 	while (++i < nb_walls)
 	{
 		w_inter = r->w_intersection + i;
-		if (w_inter->wall->column_rendered == e->g_render->column
+		if (w_inter->wall->column_rendered == e->column
 			&& w_inter->wall->depth_rendered == r->depth)
 			continue ;
 		w_inter->distance += r->base_distance;

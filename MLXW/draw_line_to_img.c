@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/28 00:05:25 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/31 12:10:03 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/06/01 05:09:12 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,5 @@ void			draw_line_to_img(t_mlx_img *img, int mlx_i[10])
 			vertical_line(img, mlx_i);
 		else
 			vertical_line(img, mlx_i);
+	mlx_put_pixel_to_img(DL_X1, DL_Y1, LINE_COLOR, img);
 }

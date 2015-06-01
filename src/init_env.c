@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 02:31:34 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/31 13:47:32 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/06/01 06:27:17 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,6 @@ t_env			*init_env(void)
 	env = (t_env*)malloc(sizeof(t_env));
 	env->game = init_game();
 	env->pplane = init_pplane();
-	env->g_render = (t_g_render*)malloc(sizeof(t_g_render));
-	ft_bzero(env->g_render, sizeof(t_g_render));
 	env->input = (t_input*)malloc(sizeof(t_input));
 	ft_bzero(env->input, sizeof(t_input));
 	init_mlx(env);

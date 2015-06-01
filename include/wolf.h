@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 01:25:04 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/31 15:31:11 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/06/01 06:43:58 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,13 @@
 # include <get_next_line.h>
 # include <libft.h>
 
-# include <quicksort.h>
-
 # include <colors.h>
+# include <texture.h>
+# include <quicksort.h>
 
 # define WIN_WIDTH		1200
 # define WIN_HEIGHT		800
 
-# define MMAP_BCKGD		0x00333333
 # define MMAP_WIDTH		300
 # define MMAP_HEIGHT	200
 # define MMAP_RATIO		0.2
@@ -49,6 +48,10 @@
 
 # define PORTAL_WIDTH	32
 # define MAX_PORTAL_DEPTH 10
+
+# define TEXTURE_RATIO	0.25
+
+typedef struct s_env	t_env;
 
 typedef struct			s_wall
 {
@@ -92,6 +95,7 @@ typedef struct			s_map
 {
 	t_wall				*walls;
 	t_sector			*sectors;
+	t_texture			*textures;
 	int					nb_walls;
 	int					nb_sectors;
 }						t_map;
@@ -136,9 +140,13 @@ typedef struct			s_render
 	double				cos_ray_ref;
 	double				base_distance;
 	char				depth;
+	int					current_top;
+	int					max_y;
+	int					min_y;
 	t_point2			reference_pos;
 	t_w_intersection	w_intersection[512];
 	t_sort				sort[512];
+	t_env				*e;
 	t_w_intersection	*tmp_inter;
 	t_wall				*tmp_wall;
 	t_sector			*tmp_sector;
@@ -168,13 +176,13 @@ typedef struct			s_game
 	t_portal			*rportal;
 }						t_game;
 
+/*
 typedef struct			s_g_render
 {
 	int					column;
-	int					current_top;
-}						t_g_render;
+}						t_g_render;*/
 
-typedef struct			s_env
+struct					s_env
 {
 	t_mlx				*mlx;
 	t_mlx_img			*screen;
@@ -182,11 +190,12 @@ typedef struct			s_env
 	t_pplane			*pplane;
 	t_game				*game;
 	t_input				*input;
-	t_g_render			*g_render;
+	//t_g_render			*g_render;
 	t_w_intersection	w_intersection[512];
 	t_sort				sort[512];
 	int					ints[10];
-}						t_env;
+	int					column;
+};
 
 //LOL
 void					draw_wall(t_wall *wall, int color, t_env *e);
@@ -213,24 +222,26 @@ void					process_walls_intersections(int nb_walls, t_sector *sector,
 						t_render *r, t_env *e);
 
 //loul
-void					render_slice(int y1, int y2, int color, t_env *e);
+void					render_slice(int y1, int y2, int color, t_render *r);
 // loul
 void					render(t_env *e);
-void					render_wall(t_w_intersection *intersection, t_env *e);
+void					render_wall(t_w_intersection *intersection, t_render *r);
 void					render_sector(t_sector *sector, t_render *r, t_env *env);
 t_sector				*next_sector(t_wall *wall, t_sector *c_sector,
 						t_sector *sectors);
 void					render_step_up(t_sector *from, t_sector *to,
-						t_w_intersection *w_inter, t_env *e);
-void					render_floor(int from, t_sector *sector, t_env *e);
+						t_w_intersection *w_inter, t_render *r, t_env *e);
+
+void					render_floor(int from, t_sector *sector, t_render *r,
+						t_env *e);
+
 void					render_portal(t_portal *portal, t_w_intersection *w_inter,
 						t_render *r, t_env *e);
 void					render_through_portal(t_portal *from, t_portal *to,
 						t_render *r, t_env *e);
 void					render_portal_overlay(t_portal *portal,
-						t_w_intersection *w_inter, t_env *e);
-void					render_portal_border(t_portal *portal,
 						t_w_intersection *w_inter, t_render *r, t_env *e);
+
 void					render_cursor(t_env *e);
 
 double					get_z_in_sector(t_sector *sector, double x, double y);

@@ -6,25 +6,24 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/25 22:41:52 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/31 14:55:04 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/06/01 06:41:27 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <wolf.h>
 
-void			render_slice(int y1, int y2, int color, t_env *e)
+void			render_slice(int y1, int y2, int color, t_render *r)
 {
-	if (y2 <= e->g_render->current_top)
+	if (y2 <= r->current_top)
 		return ;
-	if (y1 < e->g_render->current_top)
-		y1 = e->g_render->current_top;
-	if (y2 > e->screen->height)
-		y2 = e->screen->height;
-	setup_x1_y1_x2(e->g_render->column, y1, e->g_render->column,
-		e->mlx->mlx_i);
-	setup_y2_color(y2, color, e->mlx->mlx_i);
-	draw_line_to_img(e->screen, e->mlx->mlx_i);
-	e->g_render->current_top = y2;
+	if (y1 < r->current_top)
+		y1 = r->current_top;
+	if (y2 > r->max_y)
+		y2 = r->max_y;
+	setup_x1_y1_x2(r->e->column, y1, r->e->column, r->e->mlx->mlx_i);
+	setup_y2_color(y2, color, r->e->mlx->mlx_i);
+	draw_line_to_img(r->e->screen, r->e->mlx->mlx_i);
+	r->current_top = y2;
 }
 
 /*static void		render_sky(t_env *e)
@@ -39,19 +38,22 @@ void			render(t_env *e)
 {
 	t_render	r;
 
-	mlx_clear_image(0x00F2F2EF, e->screen);
+	//mlx_clear_image(0x00F2F2EF, e->screen);
 	mlx_clear_image(MMAP_BCKGD + MMAP_OPACITY, e->minimap);
-	e->g_render->column = -1;
+	e->column = -1;
 	init_render_struct(true_angle(e->game->player->angle + PLAYER_FOV / 2),
 		e->game->player->angle, &e->game->player->pos, &r);
 	r.base_distance = 0;
 	r.depth = 0;
-	while (++e->g_render->column < WIN_WIDTH)
+	r.min_y = 0;
+	r.max_y = e->screen->height - 1;
+	r.e = e;
+	while (++e->column < WIN_WIDTH)
 	{
-		e->g_render->current_top = 0;
+		r.current_top = 0;
 		render_sector(e->game->map->sectors, &r, e);
-		if (e->g_render->current_top < e->pplane->center_y + e->game->player->z_shift)
-			render_floor(e->pplane->center_y + e->game->player->z_shift, e->game->map->sectors, e);
+		/*if (e->g_render->current_top < e->pplane->center_y + e->game->player->z_shift)
+			render_floor(e->pplane->center_y + e->game->player->z_shift, e->game->map->sectors, e);*/
 		/*if (e->g_render->current_top < e->screen->height - 1)
 			render_sky(e);*/
 		render_minimap_seg(&r.ray, MMAP_RAY_COLOR + MMAP_OPACITY, e);

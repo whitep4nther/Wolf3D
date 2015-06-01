@@ -6,7 +6,7 @@
 #    By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/03 22:55:20 by ihermell          #+#    #+#              #
-#    Updated: 2015/05/31 12:57:22 by ihermell         ###   ########.fr        #
+#    Updated: 2015/06/01 06:26:17 by ihermell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ NAME		= wolf3d
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror -O3
 
-EXT_SRC		= GNL/get_next_line.c
+EXT_SRC		= GNL/get_next_line.c \
+			  BMP/load_bmp.c
 
 SRC_DIR		= src/
 SRC_NAME	=	main.c \
@@ -46,7 +47,6 @@ SRC_NAME	=	main.c \
 				render/render_portal.c \
 				render/render_through_portal.c \
 				render/render_portal_overlay.c \
-				render/render_portal_border.c \
 				\
 				render_struct/init_render_struct.c \
 				render_struct/set_render_struct_ray_angle.c \
@@ -66,6 +66,8 @@ SRC_NAME	=	main.c \
 				sector/get_z_in_sector.c \
 				\
 				walls/next_sector.c \
+				\
+				textures/load_texture.c \
 				\
 				mlx_hooks/keypress_hook.c \
 				mlx_hooks/keyrelease_hook.c \
@@ -94,7 +96,8 @@ INC_DIR		= -I $(addprefix $(LIBFT_DIR), include/) \
 			  -I MLX/ \
 			  -I MLXW/ \
 			  -I include/ \
-			  -I GNL/
+			  -I GNL/ \
+			  -I BMP/include/
 
 LIBRARIES	= -L $(LIBFT_DIR) -lft -L MLX/ -lmlx 3DSPACE/space3d.a MLXW/mlxw.a
 

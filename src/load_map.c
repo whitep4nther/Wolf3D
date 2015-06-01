@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 03:44:04 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/30 02:58:39 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/06/01 06:34:23 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,5 +156,8 @@ t_map			*load_map(char *path)
 		ft_push_back_list(ft_new_list(line), &file);
 	map = (t_map*)malloc(sizeof(t_map));
 	parse_map(file, map);
+	map->textures = (t_texture*)malloc(sizeof(t_texture) * 1);
+	load_texture("textures/portal2wall.bmp", map->textures);
+	printf("%d\n", map->textures[0].width);
 	return (map);
 }
