@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 01:25:04 by ihermell          #+#    #+#             */
-/*   Updated: 2015/06/01 10:40:48 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/06/01 12:00:29 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ typedef struct			s_w_intersection
 	int					projected_y1;
 	int					projected_y2;
 	int					projected_height;
-	int					true_projected_y1;
+	int					ground_y1;
 }						t_w_intersection;
 
 typedef struct			s_render
