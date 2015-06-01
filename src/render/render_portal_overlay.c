@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/30 06:08:54 by ihermell          #+#    #+#             */
-/*   Updated: 2015/06/01 05:07:30 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/06/01 08:41:12 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void		render_portal_overlay(t_portal *portal, t_w_intersection *w_inter,
 {
 	int		color;
 	int		actual_color;
-	int		tmp;
 	int		index;
 	int		y1;
 	int		y2;
@@ -38,7 +37,7 @@ void		render_portal_overlay(t_portal *portal, t_w_intersection *w_inter,
 		e->column * (e->screen->img_bpp >> 3);
 	while (++y1 <= y2)
 	{
-		tmp = *((int*)(e->screen->img_data + index));
+		//tmp = *((int*)(e->screen->img_data + index));
 		actual_color = mlx_get_blended_color((unsigned char*)&color,
 			(unsigned char*)(e->screen->img_data + index));
 		//actual_color = color;

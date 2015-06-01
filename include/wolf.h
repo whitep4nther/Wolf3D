@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 01:25:04 by ihermell          #+#    #+#             */
-/*   Updated: 2015/06/01 06:43:58 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/06/01 10:40:48 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ typedef struct			s_pplane
 	int					height;
 	int					center_x;
 	int					center_y;
+	int					shifted_y;
 	double				distance_to_pp;
 	double				angle_btw_rays;
 }						t_pplane;
@@ -128,6 +129,7 @@ typedef struct			s_w_intersection
 	int					projected_y1;
 	int					projected_y2;
 	int					projected_height;
+	int					true_projected_y1;
 }						t_w_intersection;
 
 typedef struct			s_render
@@ -232,6 +234,8 @@ t_sector				*next_sector(t_wall *wall, t_sector *c_sector,
 void					render_step_up(t_sector *from, t_sector *to,
 						t_w_intersection *w_inter, t_render *r, t_env *e);
 
+void					render_wall_floor(t_w_intersection *w_inter,
+						t_sector *sector, t_render *r, t_env *e);
 void					render_floor(int from, t_sector *sector, t_render *r,
 						t_env *e);
 

@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 02:31:34 by ihermell          #+#    #+#             */
-/*   Updated: 2015/06/01 06:27:17 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/06/01 08:52:00 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static t_pplane	*init_pplane(void)
 	p->height = WIN_HEIGHT;
 	p->center_x = WIN_WIDTH / 2;
 	p->center_y = WIN_HEIGHT / 2;
+	p->shifted_y = WIN_HEIGHT / 2;
 	p->distance_to_pp = (p->width / 2) / tan(D2R(PLAYER_FOV / 2));
 	p->angle_btw_rays = PLAYER_FOV / (double)p->width;
 	return (p);

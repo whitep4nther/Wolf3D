@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/25 22:41:52 by ihermell          #+#    #+#             */
-/*   Updated: 2015/06/01 06:41:27 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/06/01 09:15:46 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,30 @@ void			render_slice(int y1, int y2, int color, t_render *r)
 	setup_y2_color(e->screen->height, 0x00F2F2EF, e->mlx->mlx_i);
 	draw_line_to_img(e->screen, e->mlx->mlx_i);
 }*/
+/*
+void			render(t_env *e)
+{
+	int			i;
+	int			j;
+	t_texture	*txt;
+
+	txt = e->game->map->textures;
+		j = -1;
+	while (++j < txt->height)
+	{
+	i = -1;
+		while (++i < txt->width)
+		{
+			int index = ((j * (txt->width)) + i) * 3;
+			int color = *(int*)(txt->data + index);
+			color = (color & 0xFFFFFF);
+			printf("0x%08.8x, index %d\n", color, index);
+			mlx_put_pixel_to_img(i, j, color, e->screen);
+		}
+	}
+	mlx_put_image_to_window(e->mlx->mlx, e->mlx->win, e->screen->img, 0, 0);
+}*/
+
 
 void			render(t_env *e)
 {

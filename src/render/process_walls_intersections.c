@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/30 03:19:42 by ihermell          #+#    #+#             */
-/*   Updated: 2015/06/01 06:09:10 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/06/01 11:02:44 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void			process_walls_intersections(int nb_walls, t_sector *sector,
 {
 	int			i;
 	double		coef;
+	double		z;
 	t_w_intersection	*w_inter;
 
 	i = -1;
@@ -26,12 +27,12 @@ void			process_walls_intersections(int nb_walls, t_sector *sector,
 		if (w_inter->wall->column_rendered == e->column
 			&& w_inter->wall->depth_rendered == r->depth)
 			continue ;
+		z = get_z_in_sector(sector, w_inter->intersection.x, w_inter->intersection.y);
 		w_inter->distance += r->base_distance;
 		w_inter->cos_distance = w_inter->distance * r->cos_ray_ref;
 		coef = e->pplane->distance_to_pp / w_inter->cos_distance;
-		w_inter->projected_y1 = floor(e->pplane->center_y +
-			e->game->player->z_shift - (PLAYER_HEIGHT - get_z_in_sector(sector,
-			w_inter->intersection.x, w_inter->intersection.y)) * coef);
+		w_inter->projected_y1 = floor(e->pplane->shifted_y -
+			(PLAYER_HEIGHT - z) * coef);
 		if (w_inter->wall->is_portal == 1)
 			continue ;
 		w_inter->projected_height = floor(w_inter->wall->height * coef);

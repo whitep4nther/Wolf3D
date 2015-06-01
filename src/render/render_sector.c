@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/24 18:57:07 by ihermell          #+#    #+#             */
-/*   Updated: 2015/06/01 06:30:27 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/06/01 11:03:11 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void			render_sector(t_sector *sector, t_render *r, t_env *e)
 			return (render_sector(r->tmp_sector, r, e));
 		}
 	}
-	if (r->current_top < e->pplane->center_y + e->game->player->z_shift)
-		render_floor(e->pplane->center_y + e->game->player->z_shift, e->game->map->sectors, r, e);
+	if (r->current_top < e->pplane->shifted_y)
+		render_floor(e->pplane->shifted_y - 1, e->game->map->sectors, r, e);
 	if (r->current_top < r->max_y)
 		render_sky(r);
 }

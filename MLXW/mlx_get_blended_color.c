@@ -6,12 +6,12 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/31 14:58:57 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/31 16:19:31 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/06/01 08:48:47 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlxw.h>
-#include <stdio.h>
+
 int			mlx_get_blended_color(unsigned char *color1, unsigned char *color2)
 {
 	int		f;
